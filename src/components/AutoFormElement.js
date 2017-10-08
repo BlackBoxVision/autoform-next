@@ -5,15 +5,11 @@ export default class AutoFormElement extends React.Component {
     static displayName = "AutoFormElement";
 
     static propTypes = {
+        style: PropTypes.object,
+        className: PropTypes.string,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        element: PropTypes.string.isRequired,
-        className: PropTypes.string.isRequired,
-        style: PropTypes.object.isRequired
-    };
-
-    static defaultProps = {
-        style: {}
+        element: PropTypes.string.isRequired
     };
 
     render() {

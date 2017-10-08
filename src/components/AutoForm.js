@@ -7,19 +7,25 @@ export default class AutoForm extends React.Component {
     static displayName = "AutoForm";
 
     static propTypes = {
+        element: PropTypes.string.isRequired,
         children: PropTypes.any.isRequired,
         onSubmit: PropTypes.func.isRequired,
         formName: PropTypes.string.isRequired,
         uiAdapter: PropTypes.object.isRequired
     };
 
+    static defaultProps = {
+        element: "Form"
+    };
+
     render() {
-        const { children, onSubmit, formName } = this.props;
+        const { uiAdapter, element, children, onSubmit, formName } = this.props;
+        const FormElement = uiAdapter[element];
 
         return (
-            <form name={formName} onSubmit={onSubmit}>
+            <FormElement name={formName} onSubmit={onSubmit}>
                 {iterateChildren(children, this.renderChildren)}
-            </form>
+            </FormElement>
         )
     }
 
