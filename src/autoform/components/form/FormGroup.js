@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default class AutoFormGroup extends React.Component {
-    static displayName = "AutoFormGroup";
+export default class FormGroup extends React.Component {
+    static displayName = "FormGroup";
 
     render() {
         return React.Children.map(this.props.children, ({ props }) => JSON.stringify(props));

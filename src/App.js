@@ -1,66 +1,63 @@
 import React from 'react';
 
-import AutoForm from './components/AutoForm';
-import AutoFormGroup from './components/AutoFormGroup';
-import AutoFormSubmit from './components/AutoFormSubmit';
-import AutoFormElement from './components/AutoFormElement';
+import AutoForm from './autoform/components/AutoForm';
+import AutoFormField from './autoform/components/form/FormField';
+import AutoFormGroup from './autoform/components/form/FormGroup';
+import AutoFormSubmit from './autoform/components/form/FormSubmit';
 
-import adapter from './adapter';
+import bootstrapAdapter from './autoform/adapter/bootstrap';
 
 export default class App extends React.Component {
     render() {
         return (
             <div className="container">
                 <AutoForm
-                    element="Form"
-                    formName="someForm"
-                    uiAdapter={adapter}
+                    form="someForm"
+                    component="Form"
+                    uiAdapter={bootstrapAdapter}
                     onSubmit={this.handleSubmit}
                 >
                     <AutoFormGroup name="first-group">
-                        <AutoFormElement
+                        <AutoFormField
                             name="name"
                             label="Name"
                             type="text"
-                            element="TextInput"
+                            component="TextInput"
                         />
-                        <AutoFormElement
+                        <AutoFormField
                             name="surname"
                             label="Surname"
                             type="text"
-                            element="TextInput"
+                            component="TextInput"
                         />
-                        <AutoFormElement
+                        <AutoFormField
                             name="age"
                             label="Age"
                             type="text"
-                            element="TextInput"
+                            component="TextInput"
                         />
                     </AutoFormGroup>
-                    <AutoFormElement
+                    <AutoFormField
                         name="address"
                         label="Address"
                         type="text"
-                        element="TextInput"
+                        component="TextInput"
                     />
-                    <AutoFormElement
+                    <AutoFormField
                         name="city"
                         label="City"
                         type="text"
-                        element="TextInput"
+                        component="TextInput"
                     />
                     <AutoFormSubmit
                         label="¡Enviar Formulario!"
                         type="submit"
-                        element="Button"
+                        component="Button"
                     />
                 </AutoForm>
             </div>
         )
     }
 
-    handleSubmit = event => {
-        alert("submitting!");
-        event.preventDefault();
-    };
+    handleSubmit = values => alert(JSON.stringify(values));
 }

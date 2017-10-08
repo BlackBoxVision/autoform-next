@@ -1,8 +1,10 @@
 import React from 'react';
 
-export default function iterateChildren(children, onChildren, onHasChildren ) {
+function iterateChildren(children, onChildren, onHasChildren ) {
+    let index = 0;
+
     return React.Children.map(children, ({ props, type: { displayName } }) => {
-        const newProps = { ...props, displayName };
+        const newProps = { ...props, displayName, index: index++ };
 
         if (newProps.children)  {
             if (onHasChildren) {
@@ -14,4 +16,8 @@ export default function iterateChildren(children, onChildren, onHasChildren ) {
 
         return onChildren(newProps);
     });
-};
+}
+
+export default {
+    iterateChildren
+}

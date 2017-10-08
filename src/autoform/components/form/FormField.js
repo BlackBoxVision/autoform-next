@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class AutoFormElement extends React.Component {
-    static displayName = "AutoFormElement";
+export default class FormField extends React.Component {
+    static displayName = "FormField";
 
     static propTypes = {
         style: PropTypes.object,
         className: PropTypes.string,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        element: PropTypes.string.isRequired
+        component: PropTypes.string.isRequired
     };
 
     render() {
-        return false;
+        return this.props.children;
     }
 }
