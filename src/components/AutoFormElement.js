@@ -6,6 +6,7 @@ export default class AutoFormElement extends React.Component {
 
     static propTypes = {
         name: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
         element: PropTypes.string.isRequired,
         className: PropTypes.string.isRequired,
         style: PropTypes.object.isRequired
