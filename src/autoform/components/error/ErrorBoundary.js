@@ -19,13 +19,14 @@ export default class ErrorBoundary extends React.Component {
         info: null
     };
 
-    componentDidCatch(error, info) {
+    //Setup error handler based on React version
+    [React.version.includes("16") ? 'componentDidCatch' : 'unstable_handleError'] = (error, info) => {
         this.setState({ hasError: true, error, info });
 
         if (this.props.onFormError) {
             this.props.onFormError(error, info);
         }
-    }
+    };
 
     render() {
         if (this.state.hasError) {

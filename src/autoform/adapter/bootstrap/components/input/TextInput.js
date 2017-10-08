@@ -5,20 +5,22 @@ export default class TextInput extends React.Component {
     static displayName = "TextInput";
 
     static propTypes = {
+        type: PropTypes.string,
+        label: PropTypes.string,
         children: PropTypes.any,
         input: PropTypes.object,
         meta: PropTypes.object
     };
 
     render() {
-        const { children, input, meta, ...rest } = this.props;
+        const { input: { name, ...inputProps }, meta, label, type, children } = this.props;
 
         return (
             <div className="form-group">
-                <label htmlFor={rest.name}>
-                    {rest.label}
+                <label htmlFor={name}>
+                    {label}
                 </label>
-                <input className="form-control" placeholder={rest.label} value={input.value} onChange={input.onBlur} {...rest}>
+                <input className="form-control" type={type} id={name} name={name} placeholder={label} {...inputProps}>
                     {children}
                 </input>
             </div>

@@ -34,7 +34,8 @@ export default class App extends React.Component {
                             name="age"
                             label="Age"
                             type="text"
-                            component="TextInput"
+                            component="Select"
+                            options={[{ value: 1, text: 1 }, { value: 2, text: 2 }, { value: 3, text: 3 }]}
                         />
                     </AutoFormGroup>
                     <AutoFormField
