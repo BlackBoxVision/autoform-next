@@ -5,11 +5,11 @@ import { reduxForm, propTypes } from 'redux-form';
 import Utils from '../../utils';
 
 import FormDataProvider from './provider/FormDataProvider';
-import FormFieldRenderer from "./form/FormFieldRenderer";
-import ErrorBoundary from "./error/ErrorBoundary";
+import FormFieldRenderer from './form/FormFieldRenderer';
+import ErrorBoundary from './error/ErrorBoundary';
 
 class AutoForm extends React.PureComponent {
-    static displayName = "AutoForm";
+    static displayName = 'AutoForm';
 
     static propTypes = {
         ...propTypes,
@@ -36,11 +36,11 @@ class AutoForm extends React.PureComponent {
         destroyOnUnmount: PropTypes.bool,
         alwaysAsyncValidate: PropTypes.bool,
         returnRejectedSubmitPromise: PropTypes.bool,
-        overwriteOnInitialValuesChange: PropTypes.bool,
+        overwriteOnInitialValuesChange: PropTypes.bool
     };
 
     static defaultProps = {
-        element: "Form",
+        element: 'Form',
         onFormError: (error, info) => {
             console.info(error.message);
             console.info(info.componentStack);
@@ -48,7 +48,17 @@ class AutoForm extends React.PureComponent {
     };
 
     render() {
-        const { uiAdapter, component, children, onSubmit, form, handleSubmit, onFormError, renderError, title } = this.props;
+        const {
+            uiAdapter,
+            component,
+            children,
+            onSubmit,
+            form,
+            handleSubmit,
+            onFormError,
+            renderError,
+            title
+        } = this.props;
         const formProps = this.getFormProps();
         const Form = uiAdapter[component];
 
@@ -65,15 +75,28 @@ class AutoForm extends React.PureComponent {
     }
 
     renderChildren = ({ index, ...props }) => (
-        <FormFieldRenderer
-            key={`form-field-renderer.${index}`}
-            uiAdapter={this.props.uiAdapter}
-            {...props}
-        />
+        <FormFieldRenderer key={`form-field-renderer.${index}`} uiAdapter={this.props.uiAdapter} {...props} />
     );
 
     getFormProps = () => {
-        const reduxFormProps = [ 'initialValues', 'form', 'formKey', 'onSubmit', 'onSubmitFail', 'handleSubmit', 'onSubmitSuccess', 'readonly', 'touchOnBlur', 'touchOnChange', 'destroyOnUnmount', 'alwaysAsyncValidate', 'returnRejectedSubmitPromise', 'overwriteOnInitialValuesChange', 'pristine', 'submitting' ];
+        const reduxFormProps = [
+            'initialValues',
+            'form',
+            'formKey',
+            'onSubmit',
+            'onSubmitFail',
+            'handleSubmit',
+            'onSubmitSuccess',
+            'readonly',
+            'touchOnBlur',
+            'touchOnChange',
+            'destroyOnUnmount',
+            'alwaysAsyncValidate',
+            'returnRejectedSubmitPromise',
+            'overwriteOnInitialValuesChange',
+            'pristine',
+            'submitting'
+        ];
         const formProps = {};
 
         //TODO evaluate using arr.reduce to reduce data to { }
@@ -84,7 +107,7 @@ class AutoForm extends React.PureComponent {
         });
 
         return formProps;
-    }
+    };
 }
 
 //TODO move to decorator

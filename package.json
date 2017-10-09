@@ -17,9 +17,11 @@
     "chai": "^4.1.2",
     "enzyme": "^3.1.0",
     "mocha": "^4.0.1",
+    "prettier": "^1.7.4",
     "react-scripts": "1.0.0"
   },
   "scripts": {
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --write 'src/**/**/**/**/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -12,4 +12,4 @@ const ReduxApp = props => (
     </Provider>
 );
 
-ReactDOM.render(<ReduxApp store={configureStore()}/>, document.getElementById('root'));
+ReactDOM.render(<ReduxApp store={configureStore()} />, document.getElementById('root'));

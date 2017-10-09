@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 
 //TODO add validations
 export default class FormFieldRenderer extends React.PureComponent {
-    static displayName = "FormFieldRenderer";
+    static displayName = 'FormFieldRenderer';
 
     static propTypes = {
         uiAdapter: PropTypes.object.isRequired,
@@ -16,7 +16,7 @@ export default class FormFieldRenderer extends React.PureComponent {
         const { component, displayName, uiAdapter, ...rest } = this.props;
 
         switch (displayName) {
-            case "FormField":
+            case 'FormField':
                 return (
                     <Field
                         {...rest}
@@ -26,7 +26,7 @@ export default class FormFieldRenderer extends React.PureComponent {
                         component={this.formField}
                     />
                 );
-            case "FormSubmit":
+            case 'FormSubmit':
             default:
                 return this.props.uiAdapter[component](rest);
         }

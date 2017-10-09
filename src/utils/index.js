@@ -1,12 +1,12 @@
 import React from 'react';
 
-function iterateChildren(children, onChildren, onHasChildren ) {
+function iterateChildren(children, onChildren, onHasChildren) {
     let index = 0;
 
     return React.Children.map(children, ({ props, type: { displayName } }) => {
         const newProps = { ...props, displayName, index: index++ };
 
-        if (newProps.children)  {
+        if (newProps.children) {
             if (onHasChildren) {
                 onHasChildren(newProps.children, newProps);
             }
@@ -20,4 +20,4 @@ function iterateChildren(children, onChildren, onHasChildren ) {
 
 export default {
     iterateChildren
-}
+};
