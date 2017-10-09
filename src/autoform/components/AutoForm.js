@@ -76,6 +76,7 @@ class AutoForm extends React.PureComponent {
         const reduxFormProps = [ 'initialValues', 'form', 'formKey', 'onSubmit', 'onSubmitFail', 'handleSubmit', 'onSubmitSuccess', 'readonly', 'touchOnBlur', 'touchOnChange', 'destroyOnUnmount', 'alwaysAsyncValidate', 'returnRejectedSubmitPromise', 'overwriteOnInitialValuesChange', 'pristine', 'submitting' ];
         const formProps = {};
 
+        //TODO evaluate using arr.reduce to reduce data to { }
         reduxFormProps.forEach(reduxFormProp => {
             if (this.props.hasOwnProperty(reduxFormProp) && this.props[reduxFormProp] !== undefined) {
                 formProps[reduxFormProp] = this.props[reduxFormProp];

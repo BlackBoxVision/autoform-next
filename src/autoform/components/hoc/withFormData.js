@@ -15,7 +15,7 @@ export default function withFormData(mapFormDataToProps) {
         render() {
             const newProps = this.getNewProps();
 
-            return <WrappedComponent {...newProps}/>
+            return <WrappedComponent {...newProps}/>;
         }
 
         getNewProps = () => {
