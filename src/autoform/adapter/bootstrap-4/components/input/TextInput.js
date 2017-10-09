@@ -41,7 +41,7 @@ export default class TextInput extends React.Component {
             'form-control-lg': big,
             'form-control-sm': small,
             'is-invalid': error && touched,
-            'is-valid': !error
+            'is-valid': !error && touched
         });
 
         return (

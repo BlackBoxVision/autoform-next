@@ -29,7 +29,7 @@ export default class Select extends React.Component {
     render() {
         const {
             input: { name, ...inputProps },
-            meta,
+            meta: { error, touched },
             type,
             label,
             options,
@@ -41,7 +41,9 @@ export default class Select extends React.Component {
         } = this.props;
         const inputClassName = css('form-control', {
             'form-control-lg': big,
-            'form-control-sm': small
+            'form-control-sm': small,
+            'is-invalid': error && touched,
+            'is-valid': !error && touched
         });
 
         return (
