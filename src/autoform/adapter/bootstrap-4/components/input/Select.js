@@ -30,7 +30,6 @@ export default class Select extends React.Component {
         const {
             input: { name, ...inputProps },
             meta: { error, touched },
-            type,
             label,
             options,
             multiple,

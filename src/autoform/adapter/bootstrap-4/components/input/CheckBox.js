@@ -16,7 +16,7 @@ export default class CheckBox extends React.Component {
     };
 
     render() {
-        const { input: { name, ...inputProps }, meta, label, type } = this.props;
+        const { input: { name, ...inputProps }, label, type } = this.props;
 
         return (
             <div className="form-group">
