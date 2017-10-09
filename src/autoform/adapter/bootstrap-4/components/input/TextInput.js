@@ -2,11 +2,12 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
+//TODO add conditional render component
+//TODO extract helper-text and validation-feedback to helper components
 export default class TextInput extends React.Component {
     static displayName = 'TextInput';
 
     static propTypes = {
-        validationText: PropTypes.string,
         helpText: PropTypes.string,
         readOnly: PropTypes.bool,
         big: PropTypes.bool,
@@ -34,8 +35,7 @@ export default class TextInput extends React.Component {
             big,
             small,
             readOnly,
-            helpText,
-            validationText
+            helpText
         } = this.props;
         const inputClassName = css('form-control', {
             'form-control-lg': big,
@@ -64,7 +64,7 @@ export default class TextInput extends React.Component {
                         {helpText}
                     </small>
                 )}
-                {error && touched && <div className="invalid-feedback">{validationText}</div>}
+                {error && touched && <div className="invalid-feedback">{error}</div>}
             </div>
         );
     }
