@@ -33,6 +33,7 @@ export default class App extends React.Component {
                     </AutoFormGroup>
                     <AutoFormField name="address" label="Address" component="TextInput" />
                     <AutoFormField name="city" label="City" component="TextInput" />
+                    <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
                     <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
                 </AutoForm>
             </div>
