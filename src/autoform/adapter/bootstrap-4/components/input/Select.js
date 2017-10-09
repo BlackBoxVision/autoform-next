@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+//TODO multiple is not working yet, review how to fix it
 export default class Select extends React.Component {
     static displayName = "Select";
 
     static propTypes = {
+        multiple: PropTypes.bool,
         type: PropTypes.string,
         label: PropTypes.string,
         options: PropTypes.array,
@@ -12,8 +14,12 @@ export default class Select extends React.Component {
         meta: PropTypes.object
     };
 
+    static defaultProps = {
+        multiple: false
+    };
+
     render() {
-        const { input: { name, ...inputProps }, meta, label, type, options } = this.props;
+        const { input: { name, ...inputProps }, meta, label, type, options, multiple } = this.props;
 
         return (
             <div className="form-group">
@@ -22,7 +28,7 @@ export default class Select extends React.Component {
                         {label}
                     </label>
                 </div>
-                <select className="custom-select" id={name} name={name} {...inputProps}>
+                <select className="form-control" id={name} name={name} multiple={multiple} {...inputProps}>
                     {options.map(this.renderOptions)}
                 </select>
             </div>

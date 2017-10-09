@@ -20,7 +20,7 @@ export default class TextInput extends React.Component {
                 <label htmlFor={name}>
                     {label}
                 </label>
-                <input className="form-control" type={type} id={name} name={name} placeholder={label} {...inputProps}>
+                <input className="form-control" id={name} name={name} type={type} placeholder={label} {...inputProps}>
                     {children}
                 </input>
             </div>
