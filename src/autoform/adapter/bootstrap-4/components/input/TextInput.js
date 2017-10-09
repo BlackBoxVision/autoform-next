@@ -20,6 +20,7 @@ export default class TextInput extends React.Component {
     };
 
     static defaultProps = {
+        type: 'text',
         readOnly: false,
         big: false,
         small: false

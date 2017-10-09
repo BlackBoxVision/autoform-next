@@ -27,18 +27,12 @@ export default class App extends React.Component {
                 >
                     <AutoFormGroup name="first-group">
                         <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
-                        <AutoFormField name="name" label="Name" type="text" component="TextInput" />
-                        <AutoFormField name="surname" label="Surname" type="text" component="TextInput" />
-                        <AutoFormField
-                            name="age"
-                            label="Age"
-                            type="text"
-                            component="Select"
-                            options={createOptionsArray(100)}
-                        />
+                        <AutoFormField name="name" label="Name" component="TextInput" />
+                        <AutoFormField name="surname" label="Surname" component="TextInput" />
+                        <AutoFormField name="age" label="Age" component="Select" options={createOptionsArray(100)} />
                     </AutoFormGroup>
-                    <AutoFormField name="address" label="Address" type="text" component="TextInput" />
-                    <AutoFormField name="city" label="City" type="text" component="TextInput" />
+                    <AutoFormField name="address" label="Address" component="TextInput" />
+                    <AutoFormField name="city" label="City" component="TextInput" />
                     <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
                 </AutoForm>
             </div>
