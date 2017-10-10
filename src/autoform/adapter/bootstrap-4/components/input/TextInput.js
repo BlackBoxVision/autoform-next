@@ -66,7 +66,6 @@ export default class TextInput extends React.Component {
                     type={type}
                     readOnly={readOnly}
                     placeholder={placeholder}
-                    aria-describedby={`${name}-help-text`}
                     {...inputProps}
                 >
                     {children}

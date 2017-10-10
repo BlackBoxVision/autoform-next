@@ -70,7 +70,6 @@ export default class TextArea extends React.Component {
                     type={type}
                     readOnly={readOnly}
                     placeholder={placeholder}
-                    aria-describedby={`${name}-help-text`}
                     {...inputProps}
                 >
                     {children}

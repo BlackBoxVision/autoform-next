@@ -42,7 +42,7 @@ class AutoForm extends React.PureComponent {
     };
 
     static defaultProps = {
-        element: 'Form',
+        component: 'Form',
         onFormError: (error, info) => {
             console.info(error.message);
             console.info(info.componentStack);

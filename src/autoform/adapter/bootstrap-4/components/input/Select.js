@@ -66,7 +66,6 @@ export default class Select extends React.Component {
                     multiple={multiple}
                     readOnly={readOnly}
                     placeholder={placeholder}
-                    aria-describedby={`${name}-help-text`}
                     {...inputProps}
                 >
                     {options.map(this.renderOptions)}

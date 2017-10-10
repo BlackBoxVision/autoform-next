@@ -6,7 +6,7 @@ import AutoFormField from './autoform/components/form/FormField';
 import AutoFormGroup from './autoform/components/form/FormGroup';
 import AutoFormSubmit from './autoform/components/form/FormSubmit';
 
-import bootstrap4Adapter from './autoform/adapter/bootstrap-4';
+import bootstrap4 from './autoform/adapter/bootstrap-4';
 
 const createOptionsArray = (count, arr = []) => {
     for (let i = 1; i <= count; i++) arr.push({ value: i, text: i });
@@ -18,18 +18,12 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <AutoForm
-                    form="someForm"
-                    component="Form"
-                    title="Some Form"
-                    onSubmit={this.handleSubmit}
-                    uiAdapter={bootstrap4Adapter}
-                >
+                <AutoForm form="some-form" title="Some Form" uiAdapter={bootstrap4} onSubmit={this.handleSubmit}>
                     <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
                     <AutoFormGroup name="Personal Information" component="Group">
                         <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
                         <AutoFormField name="surname" label="Surname" component="TextInput" col={5}/>
-                        <AutoFormField name="age" label="Age" component="Select" options={createOptionsArray(100)} col={2}/>
+                        <AutoFormField name="age" label="Age" component="Select" col={2} options={createOptionsArray(100)}/>
                     </AutoFormGroup>
                     <AutoFormGroup name="Location" component="Group">
                         <AutoFormField name="address" label="Address" component="TextInput" col={7}/>
