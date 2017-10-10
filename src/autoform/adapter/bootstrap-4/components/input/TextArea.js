@@ -8,6 +8,8 @@ export default class TextArea extends React.Component {
     static displayName = 'TextArea';
 
     static propTypes = {
+        col: PropTypes.number,
+        placeholder: PropTypes.string,
         rows: PropTypes.number,
         helpText: PropTypes.string,
         readOnly: PropTypes.bool,
@@ -38,26 +40,36 @@ export default class TextArea extends React.Component {
             small,
             readOnly,
             helpText,
-            rows
+            rows,
+            placeholder,
+            col
         } = this.props;
+
+        const colSize = `col-md-${col}`;
+        const containerClassName = css('form-group', {
+            [colSize]: !!col
+        });
         const inputClassName = css('form-control', {
             'form-control-lg': big,
             'form-control-sm': small,
             'is-invalid': error && touched,
-            'is-valid': !error && touched
+            'is-valid': !error && touched,
+            [colSize]: !!col
         });
 
         return (
-            <div className="form-group">
-                <label htmlFor={name}>{label}</label>
+            <div className={containerClassName}>
+                <label className="col-form-label" htmlFor={name}>
+                    {label}
+                </label>
                 <textarea
                     className={inputClassName}
                     id={name}
                     name={name}
                     rows={rows}
                     type={type}
-                    placeholder={label}
                     readOnly={readOnly}
+                    placeholder={placeholder}
                     aria-describedby={`${name}-help-text`}
                     {...inputProps}
                 >

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
-import Utils from '../../utils';
+import Helper from '../helper';
 
 import FormDataProvider from './provider/FormDataProvider';
 import FormFieldRenderer from './form/FormFieldRenderer';
+import FormGroupRenderer from './form/FormGroupRenderer';
 import ErrorBoundary from './error/ErrorBoundary';
 
 class AutoForm extends React.PureComponent {
@@ -65,17 +66,21 @@ class AutoForm extends React.PureComponent {
 
         return (
             <FormDataProvider formProps={formProps} uiAdapter={uiAdapter}>
-                <ErrorBoundary render={renderError} onFormError={onFormError}>
+                <ErrorBoundary render={renderError} onError={onFormError}>
                     <Form name={form} onSubmit={handleSubmit(onSubmit)}>
                         <legend>{title}</legend>
-                        {Utils.iterateChildren(children, this.renderChildren)}
+                        {Helper.renderForm(children, this.renderFormGroup, this.renderFormField)}
                     </Form>
                 </ErrorBoundary>
             </FormDataProvider>
         );
     }
 
-    renderChildren = ({ index, ...props }) => (
+    renderFormGroup = ({ index, ...props }) => (
+        <FormGroupRenderer key={`form-group-renderer.${index}`} uiAdapter={this.props.uiAdapter} {...props} />
+    );
+
+    renderFormField = ({ index, ...props }) => (
         <FormFieldRenderer key={`form-field-renderer.${index}`} uiAdapter={this.props.uiAdapter} {...props} />
     );
 

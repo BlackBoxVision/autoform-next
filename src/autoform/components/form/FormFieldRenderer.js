@@ -26,9 +26,10 @@ export default class FormFieldRenderer extends React.PureComponent {
                         component={this.formField}
                     />
                 );
+            case 'FormGroup':
             case 'FormSubmit':
             default:
-                return this.props.uiAdapter[component](rest);
+                return uiAdapter[component](rest);
         }
     }
 

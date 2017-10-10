@@ -7,6 +7,8 @@ export default class Select extends React.Component {
     static displayName = 'Select';
 
     static propTypes = {
+        col: PropTypes.number,
+        placeholder: PropTypes.string,
         helpText: PropTypes.string,
         readOnly: PropTypes.bool,
         big: PropTypes.bool,
@@ -36,8 +38,15 @@ export default class Select extends React.Component {
             big,
             small,
             readOnly,
-            helpText
+            helpText,
+            placeholder,
+            col
         } = this.props;
+
+        const colSize = `col-md-${col}`;
+        const containerClassName = css('form-group', {
+            [colSize]: !!col
+        });
         const inputClassName = css('form-control', {
             'form-control-lg': big,
             'form-control-sm': small,
@@ -46,17 +55,17 @@ export default class Select extends React.Component {
         });
 
         return (
-            <div className="form-group">
-                <div>
-                    <label htmlFor={name}>{label}</label>
-                </div>
+            <div className={containerClassName}>
+                <label className="col-form-label" htmlFor={name}>
+                    {label}
+                </label>
                 <select
                     className={inputClassName}
                     id={name}
                     name={name}
                     multiple={multiple}
-                    placeholder={label}
                     readOnly={readOnly}
+                    placeholder={placeholder}
                     aria-describedby={`${name}-help-text`}
                     {...inputProps}
                 >

@@ -25,14 +25,16 @@ export default class App extends React.Component {
                     onSubmit={this.handleSubmit}
                     uiAdapter={bootstrap4Adapter}
                 >
-                    <AutoFormGroup name="first-group">
-                        <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
-                        <AutoFormField name="name" label="Name" component="TextInput" />
-                        <AutoFormField name="surname" label="Surname" component="TextInput" />
-                        <AutoFormField name="age" label="Age" component="Select" options={createOptionsArray(100)} />
+                    <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
+                    <AutoFormGroup name="Personal Information" component="Group">
+                        <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
+                        <AutoFormField name="surname" label="Surname" component="TextInput" col={5}/>
+                        <AutoFormField name="age" label="Age" component="Select" options={createOptionsArray(100)} col={2}/>
                     </AutoFormGroup>
-                    <AutoFormField name="address" label="Address" component="TextInput" />
-                    <AutoFormField name="city" label="City" component="TextInput" />
+                    <AutoFormGroup name="Location" component="Group">
+                        <AutoFormField name="address" label="Address" component="TextInput" col={7}/>
+                        <AutoFormField name="city" label="City" component="TextInput" col={5}/>
+                    </AutoFormGroup>
                     <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
                     <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
                 </AutoForm>

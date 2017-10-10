@@ -7,8 +7,10 @@ import TextInput from './components/input/TextInput';
 import TextArea from "./components/input/TextArea";
 
 import Form from './components/form/Form';
+import Group from "./components/group/Group";
 
 export default {
+    Group: props => <Group {...props} />,
     Form: props => <Form {...props} />,
     FormInline: props => <Form {...props} inline />,
     TextInput: props => <TextInput {...props} />,

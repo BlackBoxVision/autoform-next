@@ -6,7 +6,7 @@ export default class ErrorBoundary extends React.Component {
 
     static propTypes = {
         render: PropTypes.func.isRequired,
-        onFormError: PropTypes.func.isRequired
+        onError: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -23,8 +23,8 @@ export default class ErrorBoundary extends React.Component {
     [React.version.includes('16') ? 'componentDidCatch' : 'unstable_handleError'] = (error, info) => {
         this.setState({ hasError: true, error, info });
 
-        if (this.props.onFormError) {
-            this.props.onFormError(error, info);
+        if (this.props.onError) {
+            this.props.onError(error, info);
         }
     };
 
