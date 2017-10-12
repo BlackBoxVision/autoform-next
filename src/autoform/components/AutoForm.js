@@ -5,8 +5,8 @@ import { reduxForm, propTypes } from 'redux-form';
 import Helper from '../helper';
 
 import FormDataProvider from './provider/FormDataProvider';
-import FormFieldRenderer from './form/FormFieldRenderer';
-import FormGroupRenderer from './form/FormGroupRenderer';
+import FormFieldRenderer from './form/renderer/FormField';
+import FormGroupRenderer from './form/renderer/FormGroup';
 import ErrorBoundary from './error/ErrorBoundary';
 
 class AutoForm extends React.PureComponent {
