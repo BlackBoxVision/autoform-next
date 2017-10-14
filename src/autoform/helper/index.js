@@ -21,34 +21,6 @@ function renderContent(children, renderFormGroup, renderFormField) {
     });
 }
 
-function renderContentLegacy(schema, renderFormGroup, renderFormField) {
-    //TODO map schema to data needed
-    const children = mapOldSchemaToChildren(schema);
-
-    return children.map((props, index) => {
-        if (props.hasOwnProperty('children')) {
-            const formGroupProps = {
-                ...props,
-                displayName: 'FormGroup',
-                children: renderContentLegacy(props.children, renderFormGroup, renderFormField)
-            };
-
-            return renderFormGroup(formGroupProps, index);
-        } else {
-            const formFieldProps = {
-                ...props,
-                displayName: 'FormField'
-            };
-            
-            return renderFormField(formFieldProps, index);
-        }
-    });
-}
-
-//TODO 
-const mapOldSchemaToChildren = schema => schema;
-
 export default {
-    renderContent,
-    renderContentLegacy
+    renderContent
 };

@@ -6,9 +6,9 @@ import FormDataProvider from './provider/FormDataProvider';
 import FormFieldRenderer from './form/renderer/FormField';
 import FormGroupRenderer from './form/renderer/FormGroup';
 import ErrorBoundary from './error/ErrorBoundary';
-import Check from './base/Check';
 
 import FormHelper from '../helper';
+import Compat from '../compat';
 
 class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
@@ -60,42 +60,21 @@ class AutoForm extends React.PureComponent {
     };
 
     render() {
-        const { renderError, onFormError, uiFactory, debug } = this.props;
-        const shouldRenderNewForm = this.shouldRenderNewForm();
+        const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
         const reduxFormProps = this.getReduxFormProps();
+        const children = this.getChildren();
+        const Form = this.getForm();
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
                 <FormDataProvider formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
-                    <Check verify={shouldRenderNewForm} renderOnValid={this.renderAutoForm} renderOnInvalid={this.renderAutoFormLegacy} />
+                    <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
+                        {FormHelper.renderContent(children, this.renderFormGroup, this.renderFormField)}
+                    </Form>    
                 </FormDataProvider>
             </ErrorBoundary>
         );
     }
-
-    shouldRenderNewForm = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
-
-    renderAutoForm = () => {
-        const { handleSubmit, onSubmit, title, form, children } = this.props;
-        const Form = this.getFormComponent();
-        
-        return (
-            <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                {FormHelper.renderContent(children, this.renderFormGroup, this.renderFormField)}
-            </Form>
-        );
-    };
-
-    renderAutoFormLegacy = () => {
-        const { handleSubmit, onSubmit, title, form, schema } = this.props;
-        const Form = this.getFormComponent();
-
-        return (
-            <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                {FormHelper.renderContentLegacy(schema, this.renderFormGroup, this.renderFormField)}
-            </Form>
-        );    
-    };  
 
     renderFormGroup = (props, index) => (
         <FormGroupRenderer
@@ -113,7 +92,11 @@ class AutoForm extends React.PureComponent {
         />
     );
 
-    getFormComponent = () => this.props.uiFactory[this.props.component];
+    hasChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
+        
+    getChildren = _ => this.hasChildren() ? this.props.children : Compat.mapToChildren(this.props.schema);      
+
+    getForm = () => this.props.uiFactory[this.props.component];
 
     getReduxFormProps = () => {
         const reduxFormProps = [
