@@ -1,4 +1,5 @@
 import React from 'react';
+import i18next from 'i18next';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
@@ -18,7 +19,10 @@ class AutoForm extends React.PureComponent {
         debug: PropTypes.bool,
         schema: PropTypes.any,
         children: PropTypes.any,
+        locale: PropTypes.string,
+        fallbackLocale: PropTypes.string,
         renderError: PropTypes.func,
+        translations: PropTypes.object,
         title: PropTypes.string.isRequired,
         component: PropTypes.string.isRequired,
         uiFactory: PropTypes.object.isRequired,
@@ -45,6 +49,8 @@ class AutoForm extends React.PureComponent {
     };
 
     static defaultProps = {
+        locale: 'en',
+        fallbackLocale: 'en',
         debug: false,
         component: 'Form',
         renderError: (error, info) => (
@@ -62,12 +68,13 @@ class AutoForm extends React.PureComponent {
     render() {
         const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
         const reduxFormProps = this.getReduxFormProps();
+        const i18n = this.getI18nInstance();
         const children = this.getChildren();
         const Form = this.getForm();
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
-                <FormDataProvider formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
+                <FormDataProvider i18n={i18n} formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
                     <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
                         {FormHelper.renderContent(children, this.renderFormGroup, this.renderFormField)}
                     </Form>    
@@ -94,6 +101,20 @@ class AutoForm extends React.PureComponent {
 
     hasChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
         
+    getI18nInstance = _ => {
+        const { translations, fallbackLocale, locale } = this.props;
+
+        if (translations) {
+            return i18next.init({ 
+                lng: locale, 
+                fallbackLng: fallbackLocale,
+                resources: translations,
+            });
+        }
+
+        return false;
+    }
+
     getChildren = _ => this.hasChildren() ? this.props.children : Compat.mapSchemaAsChildren(this.props.schema);      
 
     getForm = _ => this.props.uiFactory[this.props.component];
