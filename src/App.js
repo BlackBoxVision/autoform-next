@@ -1,12 +1,6 @@
 import React from 'react';
 
-import AutoForm from './autoform/components/AutoForm';
-
-import AutoFormField from './autoform/components/form/FormField';
-import AutoFormGroup from './autoform/components/form/FormGroup';
-import AutoFormSubmit from './autoform/components/form/FormSubmit';
-
-import bootstrap4 from './autoform/adapter/bootstrap-4';
+import { AutoForm, AutoFormField, AutoFormGroup, AutoFormSubmit, Bootstrap4 } from './autoform';
 
 const createOptionsArray = (count, arr = []) => {
     for (let i = 1; i <= count; i++) arr.push({ value: i, text: i });
@@ -16,28 +10,30 @@ const createOptionsArray = (count, arr = []) => {
 
 const contactSchema = [
     {
-      name: "awesome-group.0",
-      component: "Group",
-      children: [
-          {
-            name: "someInput.0",
-            label: "someInput",
-            placeholder: "Some Input",
-            component: "TextInput"
-          }
-      ]
+        name: "awesome-group.0",
+        component: "Group",
+        children: [
+            {
+                name: "someInput.0",
+                label: "someInput",
+                placeholder: "Some Input",
+                component: "TextInput",
+                col: 12
+            }
+        ]
     }, 
     {
-      name: "awesome-group.1",
-      component: "Group",
-      children: [
-          {
-            name: "someInput.1",
-            label: "someInput",
-            placeholder: "Some Input",
-            component: "TextInput"
-          }
-      ] 
+        name: "awesome-group.1",
+        component: "Group",
+        children: [
+            {
+                name: "someInput.1",
+                label: "someInput",
+                placeholder: "Some Input",
+                component: "TextInput",
+                col: 12
+            }
+        ] 
     },
     {
       name: "someInput.2",
@@ -51,7 +47,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <AutoForm form="some-form" title="Some Form" uiFactory={bootstrap4} onSubmit={this.handleSubmit}>
+                <AutoForm form="some-form" title="Some Form" uiFactory={Bootstrap4} onSubmit={this.handleSubmit}>
                     <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
                     <AutoFormGroup name="Personal Information" component="Group">
                         <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
@@ -69,7 +65,7 @@ export default class App extends React.Component {
                     form="contact" 
                     title="Contact Form"
                     schema={contactSchema}
-                    uiFactory={bootstrap4} 
+                    uiFactory={Bootstrap4} 
                     onSubmit={this.handleSubmit}
                 />
             </div>

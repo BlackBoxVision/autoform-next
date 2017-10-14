@@ -1,9 +1,15 @@
-const mapToChildren = schema => schema.map(props => {
+//TODO Add functionality, and append submit to schema
+//Call outside of mapToChildren 
+const mapSchemaAsChildren = schema => {
+    return toChildren(schema);
+};
+
+const toChildren = schema => schema.map(props => {
     if (props.hasOwnProperty('children')) {
         return {
             props: {
                 ...props,
-                children: mapToChildren(props.children)
+                children: toChildren(props.children)
             },
             type: {
                 displayName: 'FormGroup'
@@ -20,5 +26,5 @@ const mapToChildren = schema => schema.map(props => {
 });
 
 export default {
-    mapToChildren
+    mapSchemaAsChildren
 };

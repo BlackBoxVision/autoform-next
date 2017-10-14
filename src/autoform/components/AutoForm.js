@@ -94,9 +94,9 @@ class AutoForm extends React.PureComponent {
 
     hasChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
         
-    getChildren = _ => this.hasChildren() ? this.props.children : Compat.mapToChildren(this.props.schema);      
+    getChildren = _ => this.hasChildren() ? this.props.children : Compat.mapSchemaAsChildren(this.props.schema);      
 
-    getForm = () => this.props.uiFactory[this.props.component];
+    getForm = _ => this.props.uiFactory[this.props.component];
 
     getReduxFormProps = () => {
         const reduxFormProps = [
