@@ -15,21 +15,18 @@ export default class FormFieldRenderer extends React.PureComponent {
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
 
-        switch (displayName) {
-            case 'FormField':
-                return (
-                    <Field
-                        {...rest}
-                        name={rest.name}
-                        type={rest.type}
-                        componentType={component}
-                        component={this.formField}
-                    />
-                );
-            case 'FormGroup':
-            case 'FormSubmit':
-            default:
-                return uiFactory[component](rest);
+        if (displayName === 'FormField') {
+            return (
+                <Field
+                    {...rest}
+                    name={rest.name}
+                    type={rest.type}
+                    componentType={component}
+                    component={this.formField}
+                />
+            );
+        } else {
+            return uiFactory[component](rest);
         }
     }
 

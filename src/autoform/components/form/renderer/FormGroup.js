@@ -14,10 +14,10 @@ export default class FormGroupRenderer extends React.PureComponent {
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
 
-        switch (displayName) {
-            case 'FormGroup':
-            default:
-                return uiFactory[component](rest);
+        if (displayName !== 'FormGroup') {
+            throw Error(`${[displayName]} is expected to be a 'FormGroup' when using <FormGroupRenderer />`);
         }
+
+        return uiFactory[component](rest);
     }
 }
