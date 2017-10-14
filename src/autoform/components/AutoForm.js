@@ -61,19 +61,19 @@ class AutoForm extends React.PureComponent {
 
     render() {
         const { renderError, onFormError, uiFactory, debug } = this.props;
-        const isVerified = this.checkSchemaAndChildren();
+        const shouldRenderNewForm = this.shouldRenderNewForm();
         const reduxFormProps = this.getReduxFormProps();
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
                 <FormDataProvider formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
-                    <Check verify={isVerified} renderOnValid={this.renderAutoForm} renderOnInvalid={this.renderAutoFormLegacy} />
+                    <Check verify={shouldRenderNewForm} renderOnValid={this.renderAutoForm} renderOnInvalid={this.renderAutoFormLegacy} />
                 </FormDataProvider>
             </ErrorBoundary>
         );
     }
 
-    checkSchemaAndChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
+    shouldRenderNewForm = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
 
     renderAutoForm = () => {
         const { handleSubmit, onSubmit, title, form, children } = this.props;
@@ -81,10 +81,10 @@ class AutoForm extends React.PureComponent {
         
         return (
             <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                {FormHelper.renderContent(children, this.renderFormGroup,this.renderFormField)}
+                {FormHelper.renderContent(children, this.renderFormGroup, this.renderFormField)}
             </Form>
         );
-    }
+    };
 
     renderAutoFormLegacy = () => {
         const { handleSubmit, onSubmit, title, form, schema } = this.props;
@@ -95,7 +95,7 @@ class AutoForm extends React.PureComponent {
                 {FormHelper.renderContentLegacy(schema, this.renderFormGroup, this.renderFormField)}
             </Form>
         );    
-    }    
+    };  
 
     renderFormGroup = (props, index) => (
         <FormGroupRenderer
