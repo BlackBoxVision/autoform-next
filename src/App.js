@@ -47,27 +47,40 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <AutoForm form="some-form" title="Some Form" uiFactory={Bootstrap4} onSubmit={this.handleSubmit}>
-                    <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
-                    <AutoFormGroup name="Personal Information" component="Group">
-                        <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
-                        <AutoFormField name="surname" label="Surname" component="TextInput" col={5}/>
-                        <AutoFormField name="age" label="Age" component="Select" col={2} options={createOptionsArray(100)}/>
-                    </AutoFormGroup>
-                    <AutoFormGroup name="Location" component="Group">
-                        <AutoFormField name="address" label="Address" component="TextInput" col={7}/>
-                        <AutoFormField name="city" label="City" component="TextInput" col={5}/>
-                    </AutoFormGroup>
-                    <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
-                    <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
-                </AutoForm>
-                <AutoForm 
-                    form="contact" 
-                    title="Contact Form"
-                    schema={contactSchema}
-                    uiFactory={Bootstrap4} 
-                    onSubmit={this.handleSubmit}
-                />
+                <br />
+                <div className="card"> 
+                    <div className="container">
+                        <AutoForm form="some-form" title="Some Form" uiFactory={Bootstrap4} onSubmit={this.handleSubmit}>
+                            <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
+                            <AutoFormGroup name="Personal Information" component="Group">
+                                <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
+                                <AutoFormField name="surname" label="Surname" component="TextInput" col={5}/>
+                                <AutoFormField name="age" label="Age" component="Select" col={2} options={createOptionsArray(100)}/>
+                            </AutoFormGroup>
+                            <AutoFormGroup name="Location" component="Group">
+                                <AutoFormField name="address" label="Address" component="TextInput" col={7}/>
+                                <AutoFormField name="city" label="City" component="TextInput" col={5}/>
+                            </AutoFormGroup>
+                            <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
+                            <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
+                            <br />
+                            <br />
+                        </AutoForm>
+                    </div>
+                </div>
+                <br />
+                <div className="card"> 
+                    <div className="container">
+                        <AutoForm 
+                            form="contact" 
+                            title="Contact Form"
+                            schema={contactSchema}
+                            uiFactory={Bootstrap4} 
+                            onSubmit={this.handleSubmit}
+                        />
+                    </div>
+                </div>
+                <br />
             </div>
         );
     }

@@ -3,13 +3,13 @@ import i18next from 'i18next';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
-import FormDataProvider from './provider/FormDataProvider';
+import ErrorBoundary from './error/ErrorBoundary';
 import FormFieldRenderer from './form/renderer/FormField';
 import FormGroupRenderer from './form/renderer/FormGroup';
-import ErrorBoundary from './error/ErrorBoundary';
+import FormDataProvider from './provider/FormDataProvider';
 
 import FormHelper from '../helper';
-import Compat from '../compat';
+import SchemaCompat from '../compat';
 
 class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
@@ -68,15 +68,15 @@ class AutoForm extends React.PureComponent {
     render() {
         const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
         const reduxFormProps = this.getReduxFormProps();
-        const i18n = this.getI18nInstance();
         const children = this.getChildren();
         const Form = this.getForm();
+        const i18n = this.getI18n();
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
                 <FormDataProvider i18n={i18n} formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
                     <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                        {FormHelper.renderContent(children, this.renderFormGroup, this.renderFormField)}
+                        {children}
                     </Form>    
                 </FormDataProvider>
             </ErrorBoundary>
@@ -98,10 +98,8 @@ class AutoForm extends React.PureComponent {
             {...props} 
         />
     );
-
-    hasChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
-        
-    getI18nInstance = _ => {
+       
+    getI18n = _ => {
         const { translations, fallbackLocale, locale } = this.props;
 
         if (translations) {
@@ -113,9 +111,17 @@ class AutoForm extends React.PureComponent {
         }
 
         return false;
-    }
+    };
 
-    getChildren = _ => this.hasChildren() ? this.props.children : Compat.mapSchemaAsChildren(this.props.schema);      
+    getChildren = _ => {
+        const { schema, children } = this.props;
+
+        return FormHelper.getChildren(
+            schema ? SchemaCompat.asReactChildren(schema) : children,
+            this.renderFormGroup, 
+            this.renderFormField
+        );
+    };
 
     getForm = _ => this.props.uiFactory[this.props.component];
 

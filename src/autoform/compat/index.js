@@ -1,6 +1,6 @@
 //TODO Add functionality, and append submit to schema
 //Call outside of mapToChildren 
-const mapSchemaAsChildren = schema => {
+const asReactChildren = schema => {
     return toChildren(schema);
 };
 
@@ -26,5 +26,5 @@ const toChildren = schema => schema.map(props => {
 });
 
 export default {
-    mapSchemaAsChildren
+    asReactChildren
 };
