@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 export default class FormDataProvider extends React.Component {
     static propTypes = {
         formProps: PropTypes.object.isRequired,
-        uiAdapter: PropTypes.object.isRequired,
+        uiFactory: PropTypes.object.isRequired,
         children: PropTypes.any
     };
 
     static childContextTypes = {
         formProps: PropTypes.object.isRequired,
-        uiAdapter: PropTypes.object.isRequired
+        uiFactory: PropTypes.object.isRequired
     };
 
     getChildContext() {
         return {
             formProps: this.props.formProps,
-            uiAdapter: this.props.uiAdapter
+            uiFactory: this.props.uiFactory
         };
     }
 

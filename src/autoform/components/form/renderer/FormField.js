@@ -7,13 +7,13 @@ export default class FormFieldRenderer extends React.PureComponent {
     static displayName = 'FormFieldRenderer';
 
     static propTypes = {
-        uiAdapter: PropTypes.object.isRequired,
+        uiFactory: PropTypes.object.isRequired,
         component: PropTypes.string.isRequired,
         displayName: PropTypes.string.isRequired
     };
 
     render() {
-        const { component, displayName, uiAdapter, ...rest } = this.props;
+        const { component, displayName, uiFactory, ...rest } = this.props;
 
         switch (displayName) {
             case 'FormField':
@@ -29,9 +29,9 @@ export default class FormFieldRenderer extends React.PureComponent {
             case 'FormGroup':
             case 'FormSubmit':
             default:
-                return uiAdapter[component](rest);
+                return uiFactory[component](rest);
         }
     }
 
-    formField = ({ componentType, ...rest }) => this.props.uiAdapter[componentType](rest);
+    formField = ({ componentType, ...rest }) => this.props.uiFactory[componentType](rest);
 }

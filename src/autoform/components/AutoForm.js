@@ -8,17 +8,19 @@ import FormDataProvider from './provider/FormDataProvider';
 import FormFieldRenderer from './form/renderer/FormField';
 import FormGroupRenderer from './form/renderer/FormGroup';
 import ErrorBoundary from './error/ErrorBoundary';
+import Check from './base/Check';
 
 class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
 
     static propTypes = {
         ...propTypes,
-        title: PropTypes.string.isRequired,
+        schema: PropTypes.object,
         renderError: PropTypes.func,
+        title: PropTypes.string.isRequired,
         children: PropTypes.any.isRequired,
         component: PropTypes.string.isRequired,
-        uiAdapter: PropTypes.object.isRequired,
+        uiFactory: PropTypes.object.isRequired,
         onFormError: PropTypes.func.isRequired,
 
         //redux-form props
@@ -50,41 +52,58 @@ class AutoForm extends React.PureComponent {
     };
 
     render() {
-        const {
-            uiAdapter,
-            component,
-            children,
-            onSubmit,
-            form,
-            handleSubmit,
-            onFormError,
-            renderError,
-            title
-        } = this.props;
-        const formProps = this.getFormProps();
-        const Form = uiAdapter[component];
+        const { handleSubmit, onFormError, renderError, component, uiFactory, onSubmit, title, form } = this.props;
+        const schemaAndChildrenCheck = this.checkSchemaAndChildren();
+        const reduxFormProps = this.getReduxFormProps();
+        const Form = uiFactory[component];
 
         return (
-            <FormDataProvider formProps={formProps} uiAdapter={uiAdapter}>
+            <FormDataProvider formProps={reduxFormProps} uiFactory={uiFactory}>
                 <ErrorBoundary render={renderError} onError={onFormError}>
-                    <Form name={form} onSubmit={handleSubmit(onSubmit)}>
-                        <legend>{title}</legend>
-                        {Helper.renderForm(children, this.renderFormGroup, this.renderFormField)}
+                    <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
+                        <Check
+                            condition={schemaAndChildrenCheck} 
+                            onCondition={this.renderAutoFormContent} 
+                            onInvalidCondition={this.renderAutoFormContentLegacy}
+                        />
                     </Form>
                 </ErrorBoundary>
             </FormDataProvider>
         );
     }
 
+    checkSchemaAndChildren = _ => !this.props.schema && React.Children.count(this.props.children) > 0;
+
+    renderAutoFormContent = () => Helper.renderFormContent(
+        this.props.children, 
+        this.renderFormGroup,
+        this.renderFormField
+    );
+
+    //TODO define how to render legacy form via schema
+    renderAutoFormContentLegacy = () => Helper.renderFormContentLegacy(
+        this.props.schema, 
+        this.renderFormGroup, 
+        this.renderFormField
+    );    
+
     renderFormGroup = ({ index, ...props }) => (
-        <FormGroupRenderer key={`form-group-renderer.${index}`} uiAdapter={this.props.uiAdapter} {...props} />
+        <FormGroupRenderer
+            key={`form-group-renderer.${index}`} 
+            uiFactory={this.props.uiFactory} 
+            {...props} 
+        />
     );
 
     renderFormField = ({ index, ...props }) => (
-        <FormFieldRenderer key={`form-field-renderer.${index}`} uiAdapter={this.props.uiAdapter} {...props} />
+        <FormFieldRenderer 
+            key={`form-field-renderer.${index}`} 
+            uiFactory={this.props.uiFactory} 
+            {...props} 
+        />
     );
 
-    getFormProps = () => {
+    getReduxFormProps = () => {
         const reduxFormProps = [
             'initialValues',
             'form',
@@ -104,16 +123,16 @@ class AutoForm extends React.PureComponent {
             'pristine',
             'submitting'
         ];
-        const formProps = {};
 
-        //TODO evaluate using arr.reduce to reduce data to { }
-        reduxFormProps.forEach(reduxFormProp => {
+        const reducer = (accum, reduxFormProp) => {
             if (this.props.hasOwnProperty(reduxFormProp) && this.props[reduxFormProp] !== undefined) {
-                formProps[reduxFormProp] = this.props[reduxFormProp];
+                accum[reduxFormProp] = this.props[reduxFormProp];
             }
-        });
 
-        return formProps;
+            return accum;
+        };
+
+        return reduxFormProps.reduce(reducer, {});;
     };
 }
 

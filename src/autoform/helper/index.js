@@ -1,13 +1,32 @@
 import React from 'react';
 
-function renderForm(children, renderFormGroup, renderFormField) {
+function renderFormContent(children, renderFormGroup, renderFormField) {
     let index = 0;
 
     return React.Children.map(children, ({ props, type: { displayName } }) => {
         const newProps = { ...props, displayName, index: index++ };
 
         if (newProps.children) {
-            const newChildren = renderForm(newProps.children, renderFormGroup, renderFormField);
+            const newChildren = renderFormContent(newProps.children, renderFormGroup, renderFormField);
+
+            return renderFormGroup({
+                ...newProps,
+                children: newChildren
+            });
+        }
+
+        return renderFormField(newProps);
+    });
+}
+
+function renderFormContentLegacy(schema, renderFormGroup, renderFormField) {
+    let index = 0;
+
+    return React.Children.map(schema, ({ props, type: { displayName } }) => {
+        const newProps = { ...props, displayName, index: index++ };
+
+        if (newProps.children) {
+            const newChildren = renderFormContentLegacy(newProps.children, renderFormGroup, renderFormField);
 
             return renderFormGroup({
                 ...newProps,
@@ -20,5 +39,6 @@ function renderForm(children, renderFormGroup, renderFormField) {
 }
 
 export default {
-    renderForm
+    renderFormContent,
+    renderFormContentLegacy
 };

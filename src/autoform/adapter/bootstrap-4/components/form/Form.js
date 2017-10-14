@@ -7,7 +7,8 @@ export default class Form extends React.Component {
 
     static propTypes = {
         children: PropTypes.any,
-        inline: PropTypes.bool
+        inline: PropTypes.bool,
+        title: PropTypes.string
     };
 
     static defaultProps = {
@@ -15,10 +16,11 @@ export default class Form extends React.Component {
     };
 
     render() {
-        const { children, inline, ...rest } = this.props;
+        const { children, inline, title, ...rest } = this.props;
 
         return (
             <form className={css({ 'form-inline': inline })} {...rest}>
+                {title && <legend>{title}</legend>}
                 {children}
             </form>
         );

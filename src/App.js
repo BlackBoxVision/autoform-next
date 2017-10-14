@@ -18,7 +18,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <AutoForm form="some-form" title="Some Form" uiAdapter={bootstrap4} onSubmit={this.handleSubmit}>
+                <AutoForm form="some-form" title="Some Form" uiFactory={bootstrap4} onSubmit={this.handleSubmit}>
                     <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
                     <AutoFormGroup name="Personal Information" component="Group">
                         <AutoFormField name="name" label="Name" component="TextInput" col={5}/>
