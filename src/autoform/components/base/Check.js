@@ -1,12 +1,17 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-const Check = ({ condition, onCondition, onInvalidCondition }) => condition ? onCondition() : onInvalidCondition();
+const Check = ({ verify, renderOnValid, renderOnInvalid }) => {
+    if (verify) {
+        return renderOnValid();
+    } else {
+        return renderOnInvalid();
+    }
+};
 
 Check.propTypes = {
-    condition: PropTypes.bool.isRequired,
-    onCondition: PropTypes.func.isRequired,
-    onInvalidCondition: PropTypes.func.isRequired
+    verify: PropTypes.bool.isRequired,
+    renderOnValid: PropTypes.func.isRequired,
+    renderOnInvalid: PropTypes.func.isRequired
 };
 
 export default Check;

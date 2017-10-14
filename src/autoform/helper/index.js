@@ -1,44 +1,43 @@
-import React from 'react';
-
-function renderFormContent(children, renderFormGroup, renderFormField) {
-    let index = 0;
-
-    return React.Children.map(children, ({ props, type: { displayName } }) => {
-        const newProps = { ...props, displayName, index: index++ };
-
-        if (newProps.children) {
-            const newChildren = renderFormContent(newProps.children, renderFormGroup, renderFormField);
-
+function renderContent(children, renderFormGroup, renderFormField) {
+    return children.map(({ props, type }, index) => {
+        if (props.hasOwnProperty('children')) {
             return renderFormGroup({
-                ...newProps,
-                children: newChildren
+                ...props,
+                index,
+                displayName: type.displayName,
+                children: renderContent(props.children, renderFormGroup, renderFormField)
             });
         }
 
-        return renderFormField(newProps);
+        return renderFormField({ 
+            ...props, 
+            index,
+            displayName: type.displayName
+        });
     });
 }
 
-function renderFormContentLegacy(schema, renderFormGroup, renderFormField) {
-    let index = 0;
-
-    return React.Children.map(schema, ({ props, type: { displayName } }) => {
-        const newProps = { ...props, displayName, index: index++ };
-
-        if (newProps.children) {
-            const newChildren = renderFormContentLegacy(newProps.children, renderFormGroup, renderFormField);
-
+ //TODO map schema to data needed
+function renderContentLegacy(schema, renderFormGroup, renderFormField) {
+    return schema.map((props, index) => {
+        if (props.hasOwnProperty('children')) {
             return renderFormGroup({
-                ...newProps,
-                children: newChildren
+                ...props,
+                index,
+                displayName: 'FormGroup',
+                children: renderContentLegacy(props.children, renderFormGroup, renderFormField)
             });
         }
-
-        return renderFormField(newProps);
+        
+        return renderFormField({
+            ...props,
+            index,
+            displayName: 'FormField'
+        });
     });
 }
 
 export default {
-    renderFormContent,
-    renderFormContentLegacy
+    renderContent,
+    renderContentLegacy
 };

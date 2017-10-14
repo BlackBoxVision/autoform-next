@@ -14,6 +14,39 @@ const createOptionsArray = (count, arr = []) => {
     return arr;
 };
 
+const contactSchema = [
+    {
+      name: "awesome-group.0",
+      component: "Group",
+      children: [
+          {
+            name: "someInput.0",
+            label: "someInput",
+            placeholder: "Some Input",
+            component: "TextInput"
+          }
+      ]
+    }, 
+    {
+      name: "awesome-group.1",
+      component: "Group",
+      children: [
+          {
+            name: "someInput.1",
+            label: "someInput",
+            placeholder: "Some Input",
+            component: "TextInput"
+          }
+      ] 
+    },
+    {
+      name: "someInput.2",
+      label: "someInput",
+      placeholder: "Some Input",
+      component: "TextInput"
+    }
+]
+
 export default class App extends React.Component {
     render() {
         return (
@@ -32,6 +65,13 @@ export default class App extends React.Component {
                     <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
                     <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
                 </AutoForm>
+                <AutoForm 
+                    form="contact" 
+                    title="Contact Form"
+                    schema={contactSchema}
+                    uiFactory={bootstrap4} 
+                    onSubmit={this.handleSubmit}
+                />
             </div>
         );
     }
