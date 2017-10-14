@@ -97,7 +97,7 @@ class AutoForm extends React.PureComponent {
         );    
     }    
 
-    renderFormGroup = ({ index, ...props }) => (
+    renderFormGroup = (props, index) => (
         <FormGroupRenderer
             key={`form-group-renderer.${index}`} 
             uiFactory={this.props.uiFactory} 
@@ -105,7 +105,7 @@ class AutoForm extends React.PureComponent {
         />
     );
 
-    renderFormField = ({ index, ...props }) => (
+    renderFormField = (props, index) => (
         <FormFieldRenderer 
             key={`form-field-renderer.${index}`} 
             uiFactory={this.props.uiFactory} 

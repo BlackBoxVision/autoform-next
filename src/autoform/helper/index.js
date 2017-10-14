@@ -1,41 +1,52 @@
 function renderContent(children, renderFormGroup, renderFormField) {
-    return children.map(({ props, type }, index) => {
+    return children.map((element, index) => {
+        const { props, type } = element;
+
         if (props.hasOwnProperty('children')) {
-            return renderFormGroup({
+            const formGroupProps = {
                 ...props,
-                index,
                 displayName: type.displayName,
                 children: renderContent(props.children, renderFormGroup, renderFormField)
-            });
-        }
+            };
 
-        return renderFormField({ 
-            ...props, 
-            index,
-            displayName: type.displayName
-        });
+            return renderFormGroup(formGroupProps, index);
+        } else {
+            const formFieldProps = {
+                ...props,
+                displayName: type.displayName
+            };
+
+            return renderFormField(formFieldProps, index);
+        }
     });
 }
 
- //TODO map schema to data needed
 function renderContentLegacy(schema, renderFormGroup, renderFormField) {
-    return schema.map((props, index) => {
+    //TODO map schema to data needed
+    const children = mapOldSchemaToChildren(schema);
+
+    return children.map((props, index) => {
         if (props.hasOwnProperty('children')) {
-            return renderFormGroup({
+            const formGroupProps = {
                 ...props,
-                index,
                 displayName: 'FormGroup',
                 children: renderContentLegacy(props.children, renderFormGroup, renderFormField)
-            });
+            };
+
+            return renderFormGroup(formGroupProps, index);
+        } else {
+            const formFieldProps = {
+                ...props,
+                displayName: 'FormField'
+            };
+            
+            return renderFormField(formFieldProps, index);
         }
-        
-        return renderFormField({
-            ...props,
-            index,
-            displayName: 'FormField'
-        });
     });
 }
+
+//TODO 
+const mapOldSchemaToChildren = schema => schema;
 
 export default {
     renderContent,
