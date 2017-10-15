@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FormDataAccesor from '../../provider/FormDataAccessor';
+
 //TODO add validations
 export default class FormGroupRenderer extends React.PureComponent {
     static displayName = 'FormGroupRenderer';
@@ -18,6 +20,6 @@ export default class FormGroupRenderer extends React.PureComponent {
             throw Error(`${[displayName]} is expected to be a 'FormGroup' when using <FormGroupRenderer />`);
         }
 
-        return uiFactory[component](rest);
+        return <FormDataAccesor render={props => uiFactory[component]({ ...rest, ...props })} />;
     }
 }

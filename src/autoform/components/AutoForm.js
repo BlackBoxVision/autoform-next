@@ -99,19 +99,11 @@ class AutoForm extends React.PureComponent {
         />
     );
        
-    getI18n = _ => {
-        const { translations, fallbackLocale, locale } = this.props;
-
-        if (translations) {
-            return i18next.init({ 
-                lng: locale, 
-                fallbackLng: fallbackLocale,
-                resources: translations,
-            });
-        }
-
-        return false;
-    };
+    getI18n = _ => i18next.init({ 
+        lng: this.props.locale, 
+        fallbackLng: this.props.fallbackLocale,
+        resources: this.props.translations,
+    });
 
     getChildren = _ => {
         const newChildren = this.props.schema ? SchemaCompat.asReactChildren(this.props.schema) : this.props.children;

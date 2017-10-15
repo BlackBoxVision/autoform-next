@@ -18,26 +18,18 @@ export default class FormDataProvider extends React.Component {
     };
 
     getChildContext() {
-        const { isDebugEnabled, formProps, uiFactory } = this.props;
-
         return {
-            isDebugEnabled,
-            formProps,
-            uiFactory
+            isDebugEnabled: this.props.isDebugEnabled,
+            formProps: this.props.formProps,
+            uiFactory: this.props.uiFactory
         };
     }
 
     render() {
-        const { i18n, children } = this.props;
-
-        if (i18n) {
-            return (
-                <I18nextProvider i18n={i18n}>
-                    {React.Children.only(children)}
-                </I18nextProvider>
-            );
-        }
-
-        return React.Children.only(children);
+        return (
+            <I18nextProvider i18n={this.props.i18n}>
+                {React.Children.only(this.props.children)}
+            </I18nextProvider>
+        );
     }
 }

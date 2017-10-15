@@ -9,7 +9,7 @@ export default class Button extends React.Component {
     };
 
     render() {
-        const { label, ...rest } = this.props;
+        const { label, isDebugEnabled, formProps, uiFactory, translate, ...rest } = this.props;
 
         return (
             <button className="btn btn-primary" {...rest}>

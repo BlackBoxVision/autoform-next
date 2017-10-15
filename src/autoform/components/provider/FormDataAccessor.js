@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 
-export default class FormDataAccesor extends React.Component {
+class FormDataAccesor extends React.Component {
     static contextTypes = {
         isDebugEnabled: PropTypes.bool.isRequired,
         formProps: PropTypes.object.isRequired,
@@ -13,6 +14,13 @@ export default class FormDataAccesor extends React.Component {
     };
 
     render() {
-        return this.props.render(this.context);
+        return this.props.render({
+            isDebugEnabled: this.context.isDebugEnabled,
+            formProps: this.context.formProps,
+            uiFactory: this.context.uiFactory,
+            translate: this.props.t
+        });
     }
 }
+
+export default translate()(FormDataAccesor);
