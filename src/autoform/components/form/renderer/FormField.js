@@ -9,8 +9,8 @@ export default class FormFieldRenderer extends React.PureComponent {
     static displayName = 'FormFieldRenderer';
 
     static propTypes = {
-        uiFactory: PropTypes.object.isRequired,
         component: PropTypes.string.isRequired,
+        uiFactory: PropTypes.object.isRequired,
         displayName: PropTypes.string.isRequired
     };
 

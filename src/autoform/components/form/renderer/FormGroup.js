@@ -8,8 +8,8 @@ export default class FormGroupRenderer extends React.PureComponent {
     static displayName = 'FormGroupRenderer';
 
     static propTypes = {
-        uiFactory: PropTypes.object.isRequired,
         component: PropTypes.string.isRequired,
+        uiFactory: PropTypes.object.isRequired,
         displayName: PropTypes.string.isRequired
     };
 
