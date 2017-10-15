@@ -6,7 +6,9 @@ export default class Group extends React.Component {
 
         return (
             <div className="form-row" {...props}>
-                <legend>{name}</legend>
+                <div className="form-group col-md-12">
+                    <legend>{name}</legend>
+                </div>
                 {children}
             </div>
         );
