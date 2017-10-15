@@ -64,17 +64,21 @@ class AutoForm extends React.PureComponent {
         }
     };
 
+    //Load i18n via state to prevent issues on render
+    state = {
+        i18n: FormHelper.getI18n(this.props)
+    };
+
     render() {
         const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
-
+       
         const formChildren = FormHelper.getChildren(this.props, this.renderGroup, this.renderField);
         const formProps = FormHelper.getReduxFormProps(this.props);
         const Form = FormHelper.getForm(this.props);
-        const i18n = FormHelper.getI18n(this.props);
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
-                <FormDataProvider i18n={i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>
+                <FormDataProvider i18n={this.state.i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>
                     <FormDataAccessor    
                         render={props => (
                             <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)} {...props}>
