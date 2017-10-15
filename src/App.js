@@ -4,19 +4,45 @@ import { AutoForm, AutoFormField, AutoFormGroup, AutoFormSubmit, Bootstrap4 } fr
 import translations from './messages';
 import createArr from './utils';
 
+const locales = [{ text: { es: "Español", en: "Spanish" }, value: "es" }, { text: { es: "Inglés", en: "English" } , value: "en" }];
+
 export default class App extends React.Component {
+    state = {
+        locale: "es"
+    };
+
+    onChange = event => this.setState({
+        locale: event.target.value
+    });
+
     render() {
+        const label = {
+            en: "Choose a language",
+            es: "Selecciona un lenguaje"
+        }
+
         return (
             <div className="container">
                 <br />
                 <div className="card">
+                    <br />
+                    <div className="container">
+                        <label className="col-form-label">{label[this.state.locale]}</label>
+                        <select className="form-control col-md-12" value={this.state.locale} onChange={this.onChange}>
+                            {locales.map(({ text, value }) => <option key={value} value={value}>{text[this.state.locale]}</option>)}
+                        </select>
+                    </div>
+                    <br />
+                </div>
+                <br />
+                <div className="card">
                     <div className="container">
                         <AutoForm
-                            locale="es"
-                            fallbackLocale="es"
                             form="contactForm"
                             title="Contact Form"
                             uiFactory={Bootstrap4}
+                            locale={this.state.locale}
+                            fallbackLocale={this.state.locale}
                             translations={translations}
                             onSubmit={this.handleSubmit}
                         >
@@ -43,8 +69,7 @@ export default class App extends React.Component {
                             <AutoFormGroup name="additional">
                                 <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} col={12} helpText />
                             </AutoFormGroup>
-                            <AutoFormSubmit label="Submit Form!" />
-                            <br />
+                            <AutoFormSubmit label="Submit Form!" fullWidth />
                             <br />
                         </AutoForm>
                     </div>
