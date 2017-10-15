@@ -20,7 +20,9 @@ export default class Form extends React.Component {
 
         return (
             <form className={css({ 'form-inline': inline })} {...rest}>
-                {title && <legend>{translate(`${name}.title`)}</legend>}
+                <br />
+                {title && <h3>{translate(`${name}.title`)}</h3>}
+                <br />
                 {children}
             </form>
         );

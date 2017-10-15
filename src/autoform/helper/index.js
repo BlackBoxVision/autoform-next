@@ -8,8 +8,16 @@ const Component = {
 };
 
 export default class FormHelper {
+    static childrenToArray(children) {
+        if (Array.isArray(children)) {
+            return children;
+        }
+
+        return [children];
+    }
+
     static _renderChildren(children, uiFactory, renderGroup, renderField) {
-        return children.map((element, index) => {
+        return FormHelper.childrenToArray(children).map((element, index) => {
             const { props, type } = element;
 
             if (type.hasOwnProperty('displayName')) {
