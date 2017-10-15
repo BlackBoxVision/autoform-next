@@ -6,6 +6,7 @@ import ErrorBoundary from './error/ErrorBoundary';
 import FormFieldRenderer from './form/renderer/FormField';
 import FormGroupRenderer from './form/renderer/FormGroup';
 import FormDataProvider from './provider/FormDataProvider';
+import FormDataAccessor from './provider/FormDataAccessor';
 
 import FormHelper from '../helper';
 
@@ -74,9 +75,13 @@ class AutoForm extends React.PureComponent {
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
                 <FormDataProvider i18n={i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>
-                    <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                        {formChildren}
-                    </Form>
+                    <FormDataAccessor    
+                        render={props => (
+                            <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)} {...props}>
+                                {formChildren}
+                            </Form>
+                        )}
+                    />
                 </FormDataProvider>
             </ErrorBoundary>
         );

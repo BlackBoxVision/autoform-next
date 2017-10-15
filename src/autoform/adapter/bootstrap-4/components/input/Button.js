@@ -1,4 +1,5 @@
 import React from 'react';
+import css from 'classnames';
 import PropTypes from 'prop-types';
 
 export default class Button extends React.Component {
@@ -9,12 +10,14 @@ export default class Button extends React.Component {
     };
 
     render() {
-        const { label, isDebugEnabled, formProps, uiFactory, translate, ...rest } = this.props;
+        const { label, isDebugEnabled, formProps, uiFactory, translate, fullWidth, ...rest } = this.props;
 
         return (
-            <button className="btn btn-primary" {...rest}>
-                {label}
-            </button>
+            <div className="form-group">
+                <button className={css("btn btn-primary", { "col-md-12": fullWidth })} {...rest}>
+                    {translate(`submit.label`) || label}
+                </button>
+            </div>
         );
     }
 }

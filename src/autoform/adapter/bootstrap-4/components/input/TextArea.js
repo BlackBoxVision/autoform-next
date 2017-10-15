@@ -11,7 +11,7 @@ export default class TextArea extends React.Component {
         col: PropTypes.number,
         placeholder: PropTypes.string,
         rows: PropTypes.number,
-        helpText: PropTypes.string,
+        helpText: PropTypes.any,
         readOnly: PropTypes.bool,
         big: PropTypes.bool,
         small: PropTypes.bool,
@@ -42,7 +42,8 @@ export default class TextArea extends React.Component {
             helpText,
             rows,
             placeholder,
-            col
+            col,
+            translate
         } = this.props;
 
         const colSize = `col-md-${col}`;
@@ -60,23 +61,23 @@ export default class TextArea extends React.Component {
         return (
             <div className={containerClassName}>
                 <label className="col-form-label" htmlFor={name}>
-                    {label}
+                    {translate(`${name}.label`) || label}   
                 </label>
                 <textarea
                     className={inputClassName}
-                    id={name}
+                    placeholder={translate(`${name}.placeholder`) || placeholder}
+                    readOnly={readOnly}
                     name={name}
                     rows={rows}
                     type={type}
-                    readOnly={readOnly}
-                    placeholder={placeholder}
+                    id={name}
                     {...inputProps}
                 >
                     {children}
                 </textarea>
                 {helpText && (
                     <small id={`${name}-help-text`} className="form-text text-muted">
-                        {helpText}
+                        {translate(`${name}.helpText`) || helpText}
                     </small>
                 )}
                 {error && touched && <div className="invalid-feedback">{error}</div>}

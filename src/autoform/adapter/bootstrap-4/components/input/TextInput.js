@@ -10,7 +10,7 @@ export default class TextInput extends React.Component {
     static propTypes = {
         col: PropTypes.number,
         placeholder: PropTypes.string,
-        helpText: PropTypes.string,
+        helpText: PropTypes.any,
         readOnly: PropTypes.bool,
         big: PropTypes.bool,
         small: PropTypes.bool,
@@ -40,6 +40,7 @@ export default class TextInput extends React.Component {
             readOnly,
             helpText,
             placeholder,
+            translate,
             col
         } = this.props;
 
@@ -57,22 +58,22 @@ export default class TextInput extends React.Component {
         return (
             <div className={containerClassName}>
                 <label className="col-form-label" htmlFor={name}>
-                    {label}
+                    {translate(`${name}.label`) || label}
                 </label>
                 <input
                     className={inputClassName}
-                    id={name}
+                    placeholder={translate(`${name}.placeholder`) || placeholder}
+                    readOnly={readOnly}
                     name={name}
                     type={type}
-                    readOnly={readOnly}
-                    placeholder={placeholder}
+                    id={name}
                     {...inputProps}
                 >
                     {children}
                 </input>
                 {helpText && (
                     <small id={`${name}-help-text`} className="form-text text-muted">
-                        {helpText}
+                        {translate(`${name}.helpText`) || helpText}
                     </small>
                 )}
                 {error && touched && <div className="invalid-feedback">{error}</div>}

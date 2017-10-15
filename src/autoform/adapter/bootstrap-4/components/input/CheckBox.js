@@ -16,14 +16,16 @@ export default class CheckBox extends React.Component {
     };
 
     render() {
-        const { input: { name, ...inputProps }, label, type } = this.props;
+        const { input: { name, ...inputProps }, label, type, translate } = this.props;
 
         return (
             <div className="form-group">
                 <label className="custom-control custom-checkbox" htmlFor={name}>
                     <input className="custom-control-input" id={name} name={name} type={type} {...inputProps} />
                     <span className="custom-control-indicator" />
-                    <span className="custom-control-description">{label}</span>
+                    <span className="custom-control-description">
+                        {translate(`${name}.label`) || label}
+                    </span>
                 </label>
             </div>
         );

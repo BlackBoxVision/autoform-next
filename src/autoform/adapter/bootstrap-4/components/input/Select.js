@@ -9,7 +9,7 @@ export default class Select extends React.Component {
     static propTypes = {
         col: PropTypes.number,
         placeholder: PropTypes.string,
-        helpText: PropTypes.string,
+        helpText: PropTypes.any,
         readOnly: PropTypes.bool,
         big: PropTypes.bool,
         small: PropTypes.bool,
@@ -40,7 +40,8 @@ export default class Select extends React.Component {
             readOnly,
             helpText,
             placeholder,
-            col
+            col,
+            translate
         } = this.props;
 
         const colSize = `col-md-${col}`;
@@ -57,22 +58,22 @@ export default class Select extends React.Component {
         return (
             <div className={containerClassName}>
                 <label className="col-form-label" htmlFor={name}>
-                    {label}
+                    {translate(`${name}.label`) || label}   
                 </label>
                 <select
                     className={inputClassName}
-                    id={name}
-                    name={name}
+                    placeholder={translate(`${name}.placeholder`) || placeholder}
                     multiple={multiple}
                     readOnly={readOnly}
-                    placeholder={placeholder}
+                    name={name}
+                    id={name}
                     {...inputProps}
                 >
                     {options.map(this.renderOptions)}
                 </select>
                 {helpText && (
                     <small id={`${name}-help-text`} className="form-text text-muted">
-                        {helpText}
+                        {translate(`${name}.helpText`) || helpText}
                     </small>
                 )}
             </div>

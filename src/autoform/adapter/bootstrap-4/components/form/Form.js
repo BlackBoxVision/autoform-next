@@ -16,11 +16,11 @@ export default class Form extends React.Component {
     };
 
     render() {
-        const { children, inline, title, ...rest } = this.props;
+        const { children, inline, title, translate, name, isDebugEnabled, uiFactory, formProps, ...rest } = this.props;
 
         return (
             <form className={css({ 'form-inline': inline })} {...rest}>
-                {title && <legend>{title}</legend>}
+                {title && <legend>{translate(`${name}.title`)}</legend>}
                 {children}
             </form>
         );
