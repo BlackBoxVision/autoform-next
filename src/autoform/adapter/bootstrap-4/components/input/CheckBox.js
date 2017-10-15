@@ -1,10 +1,12 @@
 import React from 'react';
+import css from 'classnames';
 import PropTypes from 'prop-types';
 
 export default class CheckBox extends React.Component {
     static displayName = 'CheckBox';
 
     static propTypes = {
+        fullWidth: PropTypes.bool,
         type: PropTypes.string,
         label: PropTypes.string,
         input: PropTypes.object,
@@ -16,10 +18,10 @@ export default class CheckBox extends React.Component {
     };
 
     render() {
-        const { input: { name, ...inputProps }, label, type, translate } = this.props;
+        const { input: { name, ...inputProps }, label, type, translate, fullWidth } = this.props;
 
         return (
-            <div className="form-group">
+            <div className={css("form-group", { "col-md-12": fullWidth })}>
                 <label className="custom-control custom-checkbox" htmlFor={name}>
                     <input className="custom-control-input" id={name} name={name} type={type} {...inputProps} />
                     <span className="custom-control-indicator" />

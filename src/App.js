@@ -16,6 +16,7 @@ export default class App extends React.Component {
     });
 
     render() {
+        const { locale } = this.state;
         const label = {
             en: "Choose a language",
             es: "Selecciona un lenguaje"
@@ -27,8 +28,8 @@ export default class App extends React.Component {
                 <div className="card">
                     <br />
                     <div className="container">
-                        <label className="col-form-label">{label[this.state.locale]}</label>
-                        <select className="form-control col-md-12" value={this.state.locale} onChange={this.onChange}>
+                        <label className="col-form-label">{label[locale]}</label>
+                        <select className="form-control col-md-12" value={locale} onChange={this.onChange}>
                             {locales.map(({ text, value }) => <option key={value} value={value}>{text[this.state.locale]}</option>)}
                         </select>
                     </div>
@@ -41,14 +42,14 @@ export default class App extends React.Component {
                             form="contactForm"
                             title="Contact Form"
                             uiFactory={Bootstrap4}
-                            locale={this.state.locale}
-                            fallbackLocale={this.state.locale}
+                            locale={locale}
+                            fallbackLocale={locale}
                             translations={translations}
                             onSubmit={this.handleSubmit}
                         >
                             <AutoFormGroup name="gender">
-                                <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" />
-                                <AutoFormField name="isWoman" label="Are you a Woman?" component="CheckBox" />
+                                <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" fullWidth />
+                                <AutoFormField name="isWoman" label="Are you a Woman?" component="CheckBox" fullWidth />
                             </AutoFormGroup>
                             <AutoFormGroup name="personal">
                                 <AutoFormField name="name" label="Name" col={5} helpText />
