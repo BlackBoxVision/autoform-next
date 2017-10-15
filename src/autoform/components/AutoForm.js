@@ -83,7 +83,7 @@ class AutoForm extends React.PureComponent {
         );
     }
 
-    renderFormGroup = (props, index) => (
+    renderGroup = (props, index) => (
         <FormGroupRenderer
             key={`form-group-renderer.${index}`} 
             uiFactory={this.props.uiFactory} 
@@ -91,7 +91,7 @@ class AutoForm extends React.PureComponent {
         />
     );
 
-    renderFormField = (props, index) => (
+    renderField = (props, index) => (
         <FormFieldRenderer 
             key={`form-field-renderer.${index}`} 
             uiFactory={this.props.uiFactory} 
@@ -114,13 +114,9 @@ class AutoForm extends React.PureComponent {
     };
 
     getChildren = _ => {
-        const { schema, children } = this.props;
+        const newChildren = this.props.schema ? SchemaCompat.asReactChildren(this.props.schema) : this.props.children;
 
-        return FormHelper.getChildren(
-            schema ? SchemaCompat.asReactChildren(schema) : children,
-            this.renderFormGroup, 
-            this.renderFormField
-        );
+        return FormHelper.getChildren(newChildren, this.renderGroup, this.renderField);
     };
 
     getForm = _ => this.props.uiFactory[this.props.component];
