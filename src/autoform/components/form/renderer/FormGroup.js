@@ -13,6 +13,10 @@ export default class FormGroupRenderer extends React.PureComponent {
         displayName: PropTypes.string.isRequired
     };
 
+    static defaultProps = {
+        component: "Group"
+    };
+
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
 

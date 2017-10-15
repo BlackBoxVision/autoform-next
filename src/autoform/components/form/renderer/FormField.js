@@ -14,9 +14,13 @@ export default class FormFieldRenderer extends React.PureComponent {
         displayName: PropTypes.string.isRequired
     };
 
+    static defaultProps = {
+        component: "TextInput"
+    };
+
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
-
+        
         if (displayName === 'FormField') {
             return (
                 <Field

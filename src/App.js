@@ -17,7 +17,6 @@ const contactSchema = [
                 name: "someInput.0",
                 label: "someInput",
                 placeholder: "Some Input",
-                component: "TextInput",
                 col: 12
             }
         ]
@@ -62,7 +61,7 @@ export default class App extends React.Component {
                                 <AutoFormField name="city" label="City" component="TextInput" col={5}/>
                             </AutoFormGroup>
                             <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} />
-                            <AutoFormSubmit label="¡Enviar Formulario!" type="submit" component="Button" />
+                            <AutoFormSubmit label="Submit Form!" type="submit" component="Button" />
                             <br />
                             <br />
                         </AutoForm>

@@ -49,10 +49,10 @@ class AutoForm extends React.PureComponent {
     };
 
     static defaultProps = {
-        locale: 'en',
-        fallbackLocale: 'en',
         debug: false,
+        locale: 'en',
         component: 'Form',
+        fallbackLocale: 'en',
         renderError: (error, info) => (
             <div>
                 <div>{error.message}</div>
@@ -60,8 +60,8 @@ class AutoForm extends React.PureComponent {
             </div>
         ),
         onFormError: (error, info) => {
-            console.info(error.message);
-            console.info(info.componentStack);
+            console.error(error.message);
+            console.error(info.componentStack);
         }
     };
 
