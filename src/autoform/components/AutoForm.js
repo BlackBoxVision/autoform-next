@@ -1,5 +1,4 @@
 import React from 'react';
-import i18next from 'i18next';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
@@ -9,7 +8,6 @@ import FormGroupRenderer from './form/renderer/FormGroup';
 import FormDataProvider from './provider/FormDataProvider';
 
 import FormHelper from '../helper';
-import SchemaCompat from '../compat';
 
 class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
@@ -67,83 +65,25 @@ class AutoForm extends React.PureComponent {
 
     render() {
         const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
-        const reduxFormProps = this.getReduxFormProps();
-        const children = this.getChildren();
-        const Form = this.getForm();
-        const i18n = this.getI18n();
+        const formChildren = FormHelper.getChildren(this.props, this.renderGroup, this.renderField);
+        const formProps = FormHelper.getReduxFormProps(this.props);
+        const Form = FormHelper.getForm(this.props);
+        const i18n = FormHelper.getI18n(this.props);
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
-                <FormDataProvider i18n={i18n} formProps={reduxFormProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
+                <FormDataProvider i18n={i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
                     <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
-                        {children}
+                        {formChildren}
                     </Form>    
                 </FormDataProvider>
             </ErrorBoundary>
         );
     }
 
-    renderGroup = (props, index) => (
-        <FormGroupRenderer
-            key={`form-group-renderer.${index}`} 
-            uiFactory={this.props.uiFactory} 
-            {...props} 
-        />
-    );
+    renderGroup = (props, index) => <FormGroupRenderer key={`group-renderer.${index}`} {...props} />;
 
-    renderField = (props, index) => (
-        <FormFieldRenderer 
-            key={`form-field-renderer.${index}`} 
-            uiFactory={this.props.uiFactory} 
-            {...props} 
-        />
-    );
-       
-    getI18n = _ => i18next.init({ 
-        lng: this.props.locale, 
-        fallbackLng: this.props.fallbackLocale,
-        resources: this.props.translations,
-    });
-
-    getChildren = _ => {
-        const newChildren = this.props.schema ? SchemaCompat.asReactChildren(this.props.schema) : this.props.children;
-
-        return FormHelper.getChildren(newChildren, this.renderGroup, this.renderField);
-    };
-
-    getForm = _ => this.props.uiFactory[this.props.component];
-
-    getReduxFormProps = () => {
-        const reduxFormProps = [
-            'initialValues',
-            'form',
-            'formKey',
-            'onSubmit',
-            'onSubmitFail',
-            'handleSubmit',
-            'onSubmitSuccess',
-            'reset',
-            'readonly',
-            'touchOnBlur',
-            'touchOnChange',
-            'destroyOnUnmount',
-            'alwaysAsyncValidate',
-            'returnRejectedSubmitPromise',
-            'overwriteOnInitialValuesChange',
-            'pristine',
-            'submitting'
-        ];
-
-        const reducer = (accum, reduxFormProp) => {
-            if (this.props.hasOwnProperty(reduxFormProp) && this.props[reduxFormProp] !== undefined) {
-                accum[reduxFormProp] = this.props[reduxFormProp];
-            }
-
-            return accum;
-        };
-
-        return reduxFormProps.reduce(reducer, {});;
-    };
+    renderField = (props, index) => <FormFieldRenderer key={`field-renderer.${index}`} {...props} />;
 }
 
 //TODO move to decorator
