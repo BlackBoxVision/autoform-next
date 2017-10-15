@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 
-import FormDataAccesor from '../../provider/FormDataAccessor';
+import FormDataAccessor from '../../provider/FormDataAccessor';
 
 //TODO add validations
 export default class FormFieldRenderer extends React.PureComponent {
@@ -32,6 +32,8 @@ export default class FormFieldRenderer extends React.PureComponent {
     }
 
     renderField = rest => (
-        <FormDataAccesor render={props => this.props.uiFactory[this.props.component]({ ...rest, ...props })} />
+        <FormDataAccessor render={props => this.renderComponent({ ...rest, ...props })} />
     );
+
+    renderComponent = props => this.props.uiFactory[this.props.component](props);
 }
