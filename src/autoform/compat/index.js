@@ -1,6 +1,6 @@
 export default class CompatHelper {
     //TODO Add functionality, and append submit to schema
-    //Call outside of mapToChildren 
+    //Call outside of mapToChildren
     static asReactChildren = schema => {
         return CompatHelper._toChildren(schema);
     };

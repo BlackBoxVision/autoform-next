@@ -3,11 +3,11 @@ import React from 'react';
 import Select from './components/input/Select';
 import Button from './components/input/Button';
 import CheckBox from './components/input/CheckBox';
+import TextArea from './components/input/TextArea';
 import TextInput from './components/input/TextInput';
-import TextArea from "./components/input/TextArea";
 
 import Form from './components/form/Form';
-import Group from "./components/group/Group";
+import Group from './components/group/Group';
 
 export default {
     Group: props => <Group {...props} />,

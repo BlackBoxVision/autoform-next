@@ -1,6 +1,6 @@
 {
-  "name": "autoform-poc",
-  "description": null,
+  "name": "autoform-next",
+  "description": "Next generation redux-autoform",
   "version": "0.0.11",
   "dependencies": {
     "classnames": "^2.2.5",
@@ -23,7 +23,7 @@
     "react-scripts": "1.0.0"
   },
   "scripts": {
-    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 120 --single-quote --write 'src/**/**/**/**/*.js'",
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 115 --single-quote --write 'src/**/**/**/**/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

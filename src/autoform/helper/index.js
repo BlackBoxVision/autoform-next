@@ -11,17 +11,22 @@ export default class FormHelper {
     static _renderChildren(children, uiFactory, renderGroup, renderField) {
         return children.map((element, index) => {
             const { props, type } = element;
-        
-            if (type.hasOwnProperty("displayName")) {
+
+            if (type.hasOwnProperty('displayName')) {
                 switch (type.displayName) {
-                    case Component.GROUP: 
+                    case Component.GROUP:
                         const groupProps = {
                             ...props,
                             uiFactory,
                             displayName: type.displayName,
-                            children: FormHelper._renderChildren(props.children, uiFactory, renderGroup, renderField)
+                            children: FormHelper._renderChildren(
+                                props.children,
+                                uiFactory,
+                                renderGroup,
+                                renderField
+                            )
                         };
-        
+
                         return renderGroup(groupProps, index);
                     case Component.FIELD:
                     case Component.SUBMIT:
@@ -30,26 +35,26 @@ export default class FormHelper {
                             uiFactory,
                             displayName: type.displayName
                         };
-        
+
                         return renderField(fieldProps, index);
-                    default: 
+                    default:
                         return element;
                 }
             }
-        
+
             return element;
         });
     }
 
     static getChildren({ schema, children, uiFactory }, renderGroup, renderField) {
         const newChildren = schema ? SchemaCompat.asReactChildren(schema) : children;
-    
+
         return FormHelper._renderChildren(newChildren, uiFactory, renderGroup, renderField);
-    };
+    }
 
     static getI18n({ locale, fallbackLocale, translations }) {
-        return i18next.init({ 
-            lng: locale, 
+        return i18next.init({
+            lng: locale,
             fallbackLng: fallbackLocale,
             resources: translations
         });
@@ -79,15 +84,15 @@ export default class FormHelper {
             'pristine',
             'submitting'
         ];
-    
+
         const formReducer = (accum, reduxFormProp) => {
             if (props.hasOwnProperty(reduxFormProp) && props[reduxFormProp] !== undefined) {
                 accum[reduxFormProp] = props[reduxFormProp];
             }
-    
+
             return accum;
         };
-    
-        return reduxFormProps.reduce(formReducer, {});;
-    };
+
+        return reduxFormProps.reduce(formReducer, {});
+    }
 }

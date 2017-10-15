@@ -15,29 +15,20 @@ export default class FormFieldRenderer extends React.PureComponent {
     };
 
     static defaultProps = {
-        component: "TextInput"
+        component: 'TextInput'
     };
 
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
-        
+
         if (displayName === 'FormField') {
-            return (
-                <Field
-                    component={this.renderField}
-                    name={rest.name}
-                    type={rest.type}
-                    {...rest}
-                />
-            );
+            return <Field component={this.renderField} name={rest.name} type={rest.type} {...rest} />;
         } else {
             return this.renderField(rest);
         }
     }
 
-    renderField = rest => (
-        <FormDataAccessor render={props => this.renderComponent({ ...rest, ...props })} />
-    );
+    renderField = rest => <FormDataAccessor render={this.renderComponent(rest)} />;
 
-    renderComponent = props => this.props.uiFactory[this.props.component](props);
+    renderComponent = rest => props => this.props.uiFactory[this.props.component]({ ...rest, ...props });
 }

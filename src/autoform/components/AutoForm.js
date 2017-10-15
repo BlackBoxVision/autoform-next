@@ -65,6 +65,7 @@ class AutoForm extends React.PureComponent {
 
     render() {
         const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
+
         const formChildren = FormHelper.getChildren(this.props, this.renderGroup, this.renderField);
         const formProps = FormHelper.getReduxFormProps(this.props);
         const Form = FormHelper.getForm(this.props);
@@ -72,10 +73,10 @@ class AutoForm extends React.PureComponent {
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
-                <FormDataProvider i18n={i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>        
+                <FormDataProvider i18n={i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>
                     <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)}>
                         {formChildren}
-                    </Form>    
+                    </Form>
                 </FormDataProvider>
             </ErrorBoundary>
         );
