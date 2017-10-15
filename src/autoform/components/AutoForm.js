@@ -64,32 +64,45 @@ class AutoForm extends React.PureComponent {
         }
     };
 
-    //Load i18n via state to prevent issues on render
     state = {
+        //Load i18n via state to prevent issues on render
         i18n: FormHelper.getI18n(this.props)
     };
 
+    componentWillReceiveProps(nextProps) {
+        //Check if there's a locale change, to regenerate i18n instance based on newProps
+        if (nextProps.locale !== this.props.locale && nextProps.fallbackLocale !== this.props.fallbackLocale) {
+            this.setState(prevState => ({
+                i18n: FormHelper.getI18n(nextProps)
+            }));
+        }
+    }
+
     render() {
-        const { renderError, onFormError, uiFactory, handleSubmit, onSubmit, title, form, debug } = this.props;
-       
-        const formChildren = FormHelper.getChildren(this.props, this.renderGroup, this.renderField);
+        const { renderError, onFormError, uiFactory, debug } = this.props;
         const formProps = FormHelper.getReduxFormProps(this.props);
-        const Form = FormHelper.getForm(this.props);
 
         return (
             <ErrorBoundary render={renderError} onError={onFormError}>
                 <FormDataProvider i18n={this.state.i18n} formProps={formProps} uiFactory={uiFactory} isDebugEnabled={debug}>
-                    <FormDataAccessor    
-                        render={props => (
-                            <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)} {...props}>
-                                {formChildren}
-                            </Form>
-                        )}
-                    />
+                    <FormDataAccessor render={this.renderForm} />
                 </FormDataProvider>
             </ErrorBoundary>
         );
     }
+
+    renderForm = props => { 
+        const { handleSubmit, onSubmit, title, form } = this.props;
+        
+        const formChildren = FormHelper.getChildren(this.props, this.renderGroup, this.renderField);
+        const Form = FormHelper.getForm(this.props);
+
+        return (
+            <Form name={form} title={title} onSubmit={handleSubmit(onSubmit)} {...props}>
+                {formChildren}
+            </Form>
+        );
+    };
 
     renderGroup = (props, index) => <FormGroupRenderer key={`group-renderer.${index}`} {...props} />;
 
