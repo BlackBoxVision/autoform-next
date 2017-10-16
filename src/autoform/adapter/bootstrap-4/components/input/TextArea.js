@@ -2,8 +2,8 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
-//TODO add conditional render component
-//TODO extract helper-text and validation-feedback to helper components
+import { FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+
 export default class TextArea extends React.Component {
     static displayName = 'TextArea';
 
@@ -23,7 +23,7 @@ export default class TextArea extends React.Component {
     };
 
     static defaultProps = {
-        type: 'text',
+        type: 'textarea',
         readOnly: false,
         big: false,
         small: false
@@ -46,27 +46,24 @@ export default class TextArea extends React.Component {
             translate
         } = this.props;
 
-        const colSize = `col-md-${col}`;
-        const containerClassName = css('form-group', {
-            [colSize]: !!col
-        });
-        const inputClassName = css('form-control', {
+        const input = css({
             'form-control-lg': big,
             'form-control-sm': small,
             'is-invalid': error && touched,
             'is-valid': !error && touched,
-            [colSize]: !!col
+            [`col-md-${col}`]: !!col
         });
 
         return (
-            <div className={containerClassName}>
-                <label className="col-form-label" htmlFor={name}>
-                    {translate(`${name}.label`) || label}   
-                </label>
-                <textarea
-                    className={inputClassName}
-                    placeholder={translate(`${name}.placeholder`) || placeholder}
+            <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
+                <Label className="col-form-label" for={name}>
+                    {translate(name, 'label', label)} 
+                </Label>
+                <Input
+                    placeholder={translate(name, 'placeholder', placeholder)}
+                    valid={error && touched}
                     readOnly={readOnly}
+                    className={input}
                     name={name}
                     rows={rows}
                     type={type}
@@ -74,14 +71,16 @@ export default class TextArea extends React.Component {
                     {...inputProps}
                 >
                     {children}
-                </textarea>
+                </Input>
                 {helpText && (
-                    <small id={`${name}-help-text`} className="form-text text-muted">
-                        {translate(`${name}.helpText`) || helpText}
-                    </small>
+                    <FormText id={`${name}-help-text`} color="muted">
+                        {translate(name, 'helpText', helpText)}
+                    </FormText>
                 )}
-                {error && touched && <div className="invalid-feedback">{error}</div>}
-            </div>
+                <FormFeedback>
+                    {error}
+                </FormFeedback>
+            </FormGroup>
         );
     }
 }

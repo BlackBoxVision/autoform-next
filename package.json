@@ -3,6 +3,7 @@
   "description": "Next generation redux-autoform",
   "version": "0.0.11",
   "dependencies": {
+    "bootstrap": "4.0.0-beta",
     "classnames": "^2.2.5",
     "i18next": "^10.0.1",
     "prop-types": "^15.6.0",
@@ -10,6 +11,8 @@
     "react-dom": "16.0.0",
     "react-i18next": "^6.0.6",
     "react-redux": "^5.0.6",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-form": "^7.1.0",
     "redux-logger": "^3.0.6",

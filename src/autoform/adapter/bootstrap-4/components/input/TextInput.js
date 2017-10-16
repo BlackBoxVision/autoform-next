@@ -2,6 +2,8 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
+import { FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+
 //TODO add conditional render component
 //TODO extract helper-text and validation-feedback to helper components
 export default class TextInput extends React.Component {
@@ -44,11 +46,7 @@ export default class TextInput extends React.Component {
             col
         } = this.props;
 
-        const colSize = `col-md-${col}`;
-        const containerClassName = css('form-group', {
-            [colSize]: !!col
-        });
-        const inputClassName = css('form-control', {
+        const input = css({
             'form-control-lg': big,
             'form-control-sm': small,
             'is-invalid': error && touched,
@@ -56,13 +54,13 @@ export default class TextInput extends React.Component {
         });
 
         return (
-            <div className={containerClassName}>
-                <label className="col-form-label" htmlFor={name}>
-                    {translate(`${name}.label`) || label}
-                </label>
-                <input
-                    className={inputClassName}
-                    placeholder={translate(`${name}.placeholder`) || placeholder}
+            <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
+                <Label for={name}>
+                    {translate(name, 'label', label)}
+                </Label>
+                <Input
+                    placeholder={translate(name, 'placeholder', placeholder)}
+                    valid={error && touched}
                     readOnly={readOnly}
                     name={name}
                     type={type}
@@ -70,14 +68,16 @@ export default class TextInput extends React.Component {
                     {...inputProps}
                 >
                     {children}
-                </input>
+                </Input>
                 {helpText && (
-                    <small id={`${name}-help-text`} className="form-text text-muted">
-                        {translate(`${name}.helpText`) || helpText}
-                    </small>
+                    <FormText id={`${name}-help-text`} color="muted">
+                        {translate(name, 'helpText', helpText)}
+                    </FormText>
                 )}
-                {error && touched && <div className="invalid-feedback">{error}</div>}
-            </div>
+                <FormFeedback>
+                    {error}
+                </FormFeedback>
+            </FormGroup>
         );
     }
 }

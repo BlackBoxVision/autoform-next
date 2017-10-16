@@ -2,7 +2,9 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
-export default class Button extends React.Component {
+import { Button, FormGroup } from 'reactstrap';
+
+export default class SubmitButton extends React.Component {
     static displayName = 'Button';
 
     static propTypes = {
@@ -13,11 +15,11 @@ export default class Button extends React.Component {
         const { label, isDebugEnabled, formProps, uiFactory, translate, fullWidth, ...rest } = this.props;
 
         return (
-            <div className="form-group">
-                <button className={css("btn btn-primary", { "col-md-12": fullWidth })} {...rest}>
-                    {translate(`submit.label`) || label}
-                </button>
-            </div>
+            <FormGroup>
+                <Button className={css({ "col-md-12": fullWidth })} color="primary" type="submit" {...rest}>
+                    {translate('submit', 'label', label)}
+                </Button>
+            </FormGroup>
         );
     }
 }

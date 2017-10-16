@@ -18,8 +18,19 @@ class FormDataAccessor extends React.Component {
             isDebugEnabled: this.context.isDebugEnabled,
             formProps: this.context.formProps,
             uiFactory: this.context.uiFactory,
-            translate: this.props.t
+            translate: this.patchTranslate,
+            t: this.props.t
         });
+    }
+
+    patchTranslate = (field, type, text) => {
+        if (this.props.t) {
+            const translated = this.props.t(`${field}.${type}`);
+
+            return translated.includes(type) ? text : translated;
+        }
+
+        return text;
     }
 }
 

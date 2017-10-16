@@ -2,6 +2,8 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
+import { Form as BoostrapForm } from 'reactstrap'; 
+
 export default class Form extends React.Component {
     static displayName = 'Form';
 
@@ -19,12 +21,12 @@ export default class Form extends React.Component {
         const { children, inline, title, translate, name, isDebugEnabled, uiFactory, formProps, ...rest } = this.props;
 
         return (
-            <form className={css({ 'form-inline': inline })} {...rest}>
+            <BoostrapForm className={css({ 'form-inline': inline })} {...rest}>
                 <br />
-                {title && <h3>{translate(`${name}.title`)}</h3>}
+                <h3>{translate(name, 'title', title)}</h3>
                 <br />
                 {children}
-            </form>
+            </BoostrapForm>
         );
     }
 }

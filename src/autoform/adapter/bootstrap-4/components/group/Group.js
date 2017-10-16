@@ -7,8 +7,9 @@ export default class Group extends React.Component {
         return (
             <div className="form-row" {...props}>
                 <div className="form-group col-md-12">
-                    <h5>{translate(`${name}.title`) || title}</h5>
+                    <h5>{translate(name, 'title', title)}</h5>
                 </div>
+                <br />
                 {children}
             </div>
         );
