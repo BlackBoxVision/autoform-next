@@ -68,6 +68,7 @@ export default class App extends React.Component {
                                     label="Number"
                                     component="Radio"
                                     options={createArr(5)}
+                                    helpText="This is some help text"
                                 />
                             </AutoFormGroup>
                             <AutoFormGroup name="location">

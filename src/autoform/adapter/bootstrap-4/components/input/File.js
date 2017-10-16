@@ -14,6 +14,7 @@ export default class FileInput extends React.Component {
         big: PropTypes.bool,
         small: PropTypes.bool,
         readOnly: PropTypes.bool,
+        multiple: PropTypes.bool,
         type: PropTypes.string,
         label: PropTypes.string,
         placeholder: PropTypes.string,
@@ -23,13 +24,14 @@ export default class FileInput extends React.Component {
 
     static defaultProps = {
         type: 'file',
+        multiple: false,
         readOnly: false,
         small: false,
         big: false
     };
 
     render() {
-        const { input: { name, ...rest }, type, children, readOnly } = this.props;
+        const { input: { name, value, ...rest }, multiple, type, children, readOnly } = this.props;
 
         const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
         const { label, placeholder, helpText, error } = this.getMessages();
@@ -43,6 +45,7 @@ export default class FileInput extends React.Component {
                 <Input
                     className={inputClassName}
                     placeholder={placeholder}
+                    multiple={multiple}
                     readOnly={readOnly}
                     valid={hasError}
                     name={name}
