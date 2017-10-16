@@ -62,6 +62,7 @@ export default class TextInput extends React.Component {
                     placeholder={translate(name, 'placeholder', placeholder)}
                     valid={error && touched}
                     readOnly={readOnly}
+                    className={input}
                     name={name}
                     type={type}
                     id={name}

@@ -1,17 +1,19 @@
 import React from 'react';
 
+import { FormGroup } from 'reactstrap';
+
 export default class Group extends React.Component {
     render() {
-        const { children, name, isDebugEnabled, formProps, uiFactory, translate, title, ...props } = this.props;
+        const { children, name, isDebugEnabled, formProps, uiFactory, translate, title, t, ...props } = this.props;
 
         return (
-            <div className="form-row" {...props}>
-                <div className="form-group col-md-12">
+            <FormGroup {...props} row>
+                <FormGroup className="col-md-12">
                     <h5>{translate(name, 'title', title)}</h5>
-                </div>
+                </FormGroup>
                 <br />
                 {children}
-            </div>
+            </FormGroup>
         );
     }
 }

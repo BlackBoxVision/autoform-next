@@ -2,6 +2,8 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
+import { FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+
 //TODO multiple is not working yet, review how to fix it
 export default class Select extends React.Component {
     static displayName = 'Select';
@@ -22,6 +24,7 @@ export default class Select extends React.Component {
     };
 
     static defaultProps = {
+        type: 'select',
         readOnly: false,
         multiple: false,
         big: false,
@@ -41,14 +44,11 @@ export default class Select extends React.Component {
             helpText,
             placeholder,
             col,
-            translate
+            translate,
+            type
         } = this.props;
 
-        const colSize = `col-md-${col}`;
-        const containerClassName = css('form-group', {
-            [colSize]: !!col
-        });
-        const inputClassName = css('form-control', {
+        const input = css('form-control', {
             'form-control-lg': big,
             'form-control-sm': small,
             'is-invalid': error && touched,
@@ -56,32 +56,37 @@ export default class Select extends React.Component {
         });
 
         return (
-            <div className={containerClassName}>
-                <label className="col-form-label" htmlFor={name}>
-                    {translate(`${name}.label`) || label}   
-                </label>
-                <select
-                    className={inputClassName}
-                    placeholder={translate(`${name}.placeholder`) || placeholder}
+            <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
+                <Label className="col-form-label" htmlFor={name}>
+                    {translate(name, 'label', label)}   
+                </Label>
+                <Input
+                    placeholder={translate(name, 'placeholder', placeholder)}
+                    valid={error && touched}
                     multiple={multiple}
                     readOnly={readOnly}
+                    className={input}
+                    type={type}
                     name={name}
                     id={name}
                     {...inputProps}
                 >
                     {options.map(this.renderOptions)}
-                </select>
+                </Input>
                 {helpText && (
-                    <small id={`${name}-help-text`} className="form-text text-muted">
-                        {translate(`${name}.helpText`) || helpText}
-                    </small>
+                    <FormText id={`${name}-help-text`} color="muted">
+                        {translate(name, 'helpText', helpText)}
+                    </FormText>
                 )}
-            </div>
+                <FormFeedback>
+                    {error}
+                </FormFeedback>
+            </FormGroup>
         );
     }
 
     renderOptions = ({ value, text }, index) => (
-        <option key={`select-option.${index}`} value={value}>
+        <option key={`option.${index}`} value={value}>
             {text}
         </option>
     );

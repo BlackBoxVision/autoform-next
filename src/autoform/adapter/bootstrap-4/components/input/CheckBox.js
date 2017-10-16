@@ -2,7 +2,7 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { FormGroup, Label, Input } from 'reactstrap';
 
 export default class CheckBox extends React.Component {
     static displayName = 'CheckBox';
@@ -26,7 +26,7 @@ export default class CheckBox extends React.Component {
             <FormGroup className={css({ "col-md-12": fullWidth })} check>
                 <Label for={name} check>
                     <Input id={name} name={name} type={type} {...inputProps} />
-                    {translate(name, 'label', label)}
+                    {` ${translate(name, 'label', label)}`}
                 </Label>
             </FormGroup>
         );
