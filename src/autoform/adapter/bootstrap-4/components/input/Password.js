@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 
 import { FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 
-//TODO add conditional render component
-//TODO extract helper-text and validation-feedback to helper components
-export default class TextInput extends React.Component {
-    static displayName = 'TextInput';
+export default class PasswordInput extends React.Component {
+    static displayName = 'PasswordInput';
 
     static propTypes = {
         col: PropTypes.number,
@@ -24,7 +22,7 @@ export default class TextInput extends React.Component {
     };
 
     static defaultProps = {
-        type: 'text',
+        type: 'password',
         readOnly: false,
         small: false,
         big: false

@@ -71,7 +71,7 @@ export default class App extends React.Component {
                                 />
                             </AutoFormGroup>
                             <AutoFormGroup name="location">
-                                <AutoFormField name="address" label="Address" col={7} helpText />
+                                <AutoFormField type="number" name="address" label="Address" col={7} helpText />
                                 <AutoFormField name="city" label="City" col={5} helpText />
                             </AutoFormGroup>
                             <AutoFormGroup name="additional">
