@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import Radio from './components/input/Radio';
 import Select from './components/input/Select';
 import Button from './components/input/Button';
 import CheckBox from './components/input/CheckBox';
@@ -18,5 +19,6 @@ export default {
     TextArea: props => <TextArea {...props} />,
     CheckBox: props => <CheckBox {...props} />,
     Select: props => <Select {...props} />,
-    Button: props => <Button {...props} />
+    Button: props => <Button {...props} />,
+    Radio: props => <Radio {...props} />,
 };

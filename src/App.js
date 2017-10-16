@@ -62,6 +62,14 @@ export default class App extends React.Component {
                                     options={createArr(100)}
                                     helpText
                                 />
+                                <AutoFormField
+                                    col={2}
+                                    name="number"
+                                    label="Number"
+                                    component="Radio"
+                                    options={createArr(5)}
+                                    helpText
+                                />
                             </AutoFormGroup>
                             <AutoFormGroup name="location">
                                 <AutoFormField name="address" label="Address" col={7} helpText />

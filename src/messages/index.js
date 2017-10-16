@@ -17,10 +17,10 @@ export default {
                 title: "Datos adiccionales"
             },
             isMan: {
-                label: "Es usted hombre?"
+                label: "hombre"
             },
             isWoman: {
-                label: "Es usted mujer?"
+                label: "mujer"
             },
             name: {
                 label: "Nombre",
