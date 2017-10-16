@@ -25,56 +25,38 @@ export default class TextArea extends React.Component {
     static defaultProps = {
         type: 'textarea',
         readOnly: false,
-        big: false,
-        small: false
+        small: false,
+        big: false
     };
 
     render() {
-        const {
-            input: { name, ...inputProps },
-            meta: { error, touched },
-            label,
-            type,
-            children,
-            big,
-            small,
-            readOnly,
-            helpText,
-            rows,
-            placeholder,
-            col,
-            translate
-        } = this.props;
+        const { input: { name, ...rest }, type, children, readOnly, rows } = this.props;
 
-        const input = css({
-            'form-control-lg': big,
-            'form-control-sm': small,
-            'is-invalid': error && touched,
-            'is-valid': !error && touched,
-            [`col-md-${col}`]: !!col
-        });
+        const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
+        const { label, placeholder, helpText, error } = this.getMessages();
+        const hasError = this.hasError();
 
         return (
-            <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
-                <Label className="col-form-label" for={name}>
-                    {translate(name, 'label', label)} 
+            <FormGroup className={containerClassName}>
+                <Label for={name} className={labelClassName}>
+                    {label} 
                 </Label>
                 <Input
-                    placeholder={translate(name, 'placeholder', placeholder)}
-                    valid={error && touched}
+                    className={inputClassName}
+                    placeholder={placeholder}
                     readOnly={readOnly}
-                    className={input}
+                    valid={hasError}
                     name={name}
                     rows={rows}
                     type={type}
                     id={name}
-                    {...inputProps}
+                    {...rest}
                 >
                     {children}
                 </Input>
                 {helpText && (
-                    <FormText id={`${name}-help-text`} color="muted">
-                        {translate(name, 'helpText', helpText)}
+                    <FormText id={name} color="muted">
+                        {helpText}
                     </FormText>
                 )}
                 <FormFeedback>
@@ -83,4 +65,34 @@ export default class TextArea extends React.Component {
             </FormGroup>
         );
     }
+
+    hasError = _ => this.props.meta.error && this.props.meta.touched;
+
+    getClassNames() {
+        const { meta: { error, touched }, big, small, col } = this.props;
+
+        return {
+            containerClassName: css({ [`col-md-${col}`]: !!col }),
+            labelClassName: 'col-form-label',
+            inputClassName: css({
+                'form-control-lg': big,
+                'form-control-sm': small,
+                'is-invalid': error && touched,
+                'is-valid': !error && touched,
+                [`col-md-${col}`]: !!col
+            })
+        };
+    };
+
+    getMessages() {
+        const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
+
+        return {
+            //error in meta should be the key of the translated message
+            placeholder: translate(name, 'placeholder', placeholder),
+            helpText: translate(name, 'helpText', helpText),
+            label: translate(name, 'label', label),
+            error: translate(name, error, error)
+        };
+    };
 }
