@@ -88,7 +88,7 @@ export default class TextArea extends React.Component {
         const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
 
         return {
-            //error in meta should be the key of the translated message
+            //error in meta should be the key of the message to translate
             placeholder: translate(name, 'placeholder', placeholder),
             helpText: translate(name, 'helpText', helpText),
             label: translate(name, 'label', label),

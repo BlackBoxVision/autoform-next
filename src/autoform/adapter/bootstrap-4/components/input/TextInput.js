@@ -78,21 +78,20 @@ export default class TextInput extends React.Component {
                 'form-control-lg': big,
                 'form-control-sm': small,
                 'is-invalid': error && touched,
-                'is-valid': !error && touched,
-                [`col-md-${col}`]: !!col
+                'is-valid': !error && touched
             })
         };
-    }
+    };
 
     getMessages() {
         const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
 
         return {
-            //error in meta should be the key of the translated message
+            //error in meta should be the key of the message to translate
             placeholder: translate(name, 'placeholder', placeholder),
             helpText: translate(name, 'helpText', helpText),
             label: translate(name, 'label', label),
             error: translate(name, error, error)
         };
-    }
+    };
 }

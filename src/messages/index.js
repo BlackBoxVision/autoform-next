@@ -75,10 +75,10 @@ export default {
                 title: "Additional Data"
             },
             isMan: {
-                label: "Are you a man?"
+                label: "man"
             },
             isWoman: {
-                label: "Are you a woman?"
+                label: "woman"
             },
             name: {
                 label: "Name",

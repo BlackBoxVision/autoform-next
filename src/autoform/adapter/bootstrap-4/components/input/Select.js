@@ -27,55 +27,38 @@ export default class Select extends React.Component {
         type: 'select',
         readOnly: false,
         multiple: false,
-        big: false,
-        small: false
+        small: false,
+        big: false
     };
 
     render() {
-        const {
-            input: { name, ...inputProps },
-            meta: { error, touched },
-            label,
-            options,
-            multiple,
-            big,
-            small,
-            readOnly,
-            helpText,
-            placeholder,
-            col,
-            translate,
-            type
-        } = this.props;
+        const { input: { name, ...rest }, options, multiple, readOnly, type } = this.props;
 
-        const input = css('form-control', {
-            'form-control-lg': big,
-            'form-control-sm': small,
-            'is-invalid': error && touched,
-            'is-valid': !error && touched
-        });
+        const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
+        const { label, placeholder, helpText, error } = this.getMessages();
+        const hasError = this.hasError();
 
         return (
-            <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
-                <Label for={name}>
-                    {translate(name, 'label', label)}   
+            <FormGroup className={containerClassName}>
+                <Label for={name} className={labelClassName}>
+                    {label}   
                 </Label>
                 <Input
-                    placeholder={translate(name, 'placeholder', placeholder)}
-                    valid={error && touched}
+                    className={inputClassName}
+                    placeholder={placeholder}
                     multiple={multiple}
                     readOnly={readOnly}
-                    className={input}
+                    valid={hasError}
                     type={type}
                     name={name}
                     id={name}
-                    {...inputProps}
+                    {...rest}
                 >
                     {options.map(this.renderOptions)}
                 </Input>
                 {helpText && (
-                    <FormText id={`${name}-help-text`} color="muted">
-                        {translate(name, 'helpText', helpText)}
+                    <FormText id={name} color="muted">
+                        {helpText}
                     </FormText>
                 )}
                 <FormFeedback>
@@ -85,9 +68,42 @@ export default class Select extends React.Component {
         );
     }
 
-    renderOptions = ({ value, text }, index) => (
-        <option key={`option.${index}`} value={value}>
-            {text}
-        </option>
-    );
+    renderOptions = ({ value, text }, index) => { 
+        const { translate, input: { name } } = this.props;
+
+        return (
+            <option key={`option.${index}`} value={value}>
+                {` ${translate(name, `option.${index}`, text)}`}
+            </option>
+        )
+    };
+
+    hasError = _ => this.props.meta.error && this.props.meta.touched;    
+    
+    getClassNames() {
+        const { meta: { error, touched }, big, small, col } = this.props;
+    
+        return {
+            containerClassName: css({ [`col-md-${col}`]: !!col }),
+            labelClassName: 'col-form-label',
+            inputClassName: css({
+                'form-control-lg': big,
+                'form-control-sm': small,
+                'is-invalid': error && touched,
+                'is-valid': !error && touched
+            })
+        };
+    };
+    
+    getMessages() {
+        const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
+    
+        return {
+            //error in meta should be the key of the message to translate
+            placeholder: translate(name, 'placeholder', placeholder),
+            helpText: translate(name, 'helpText', helpText),
+            label: translate(name, 'label', label),
+            error: translate(name, error, error)
+        };
+    };
 }
