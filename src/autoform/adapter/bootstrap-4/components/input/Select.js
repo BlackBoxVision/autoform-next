@@ -57,7 +57,7 @@ export default class Select extends React.Component {
 
         return (
             <FormGroup className={css({ [`col-md-${col}`]: !!col })}>
-                <Label className="col-form-label" htmlFor={name}>
+                <Label for={name}>
                     {translate(name, 'label', label)}   
                 </Label>
                 <Input
