@@ -50,7 +50,7 @@ export default {
             age: {
                 label: "Edad",
                 placeholder: "edad",
-                helpText: "Selecciona tu edad de este combo"
+                helpText: "Selecciona tu edad"
             },
             submit: {
                 label: "Enviar Formulario de Contacto"

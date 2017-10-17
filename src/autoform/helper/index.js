@@ -1,10 +1,12 @@
 import i18next from 'i18next';
 import SchemaCompat from '../compat';
 
-const Component = {
+export const Component = {
     GROUP: 'FormGroup',
     FIELD: 'FormField',
-    SUBMIT: 'FormSubmit'
+    SUBMIT: 'FormSubmit',
+    FIELD_ARRAY: 'FormFieldArray',
+    FIELD_ENTITY: 'FormFieldEntity'
 };
 
 export default class FormHelper {
