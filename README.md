@@ -1,3 +1,3 @@
-# Autoform-next
+## AutoForm next
 
-Next generation redux-autoform API
+AutoForm next packages
