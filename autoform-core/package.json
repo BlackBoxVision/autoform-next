@@ -1,0 +1,8 @@
+{
+  "name": "autoform-core",
+  "version": "1.0.0",
+  "description": "Core components for AutoForm",
+  "main": "index.js",
+  "author": "Jonatan E. Salas",
+  "license": "MIT"
+}

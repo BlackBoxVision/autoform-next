@@ -1,7 +1,9 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+autoform-core/node_modules
+autoform-example/node_modules
+autoform-bootstrap4/node_modules
 
 # testing
 /coverage
