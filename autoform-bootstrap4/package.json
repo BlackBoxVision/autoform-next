@@ -2,7 +2,7 @@
   "name": "autoform-bootstrap4",
   "version": "1.0.0",
   "description": "AutoForm Bootstrap 4 components ",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Jonatan E. Salas",
   "license": "MIT"
 }
