@@ -21,9 +21,9 @@ export default class CheckBox extends React.Component {
 
     render() {
         const { input: { name, ...rest }, type } = this.props;
-        
+
         const { containerClassName } = this.getClassNames();
-        const { label } = this.getMessages()
+        const { label } = this.getMessages();
 
         return (
             <FormGroup className={containerClassName} check>
@@ -39,17 +39,17 @@ export default class CheckBox extends React.Component {
         const { fullWidth } = this.props;
 
         return {
-            containerClassName: css({ 
-                'col-md-12': fullWidth 
+            containerClassName: css({
+                'col-md-12': fullWidth
             })
         };
-    };
+    }
 
     getMessages() {
         const { input: { name }, label, translate } = this.props;
 
         return {
-            label: translate(name, 'label', label),
+            label: translate(name, 'label', label)
         };
-    };
+    }
 }

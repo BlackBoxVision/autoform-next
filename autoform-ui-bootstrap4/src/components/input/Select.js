@@ -32,16 +32,26 @@ export default class Select extends React.Component {
     };
 
     render() {
-        const { input: { name, ...rest }, options, multiple, readOnly, type } = this.props;
+        const {
+            input: { name, ...rest },
+            options,
+            multiple,
+            readOnly,
+            type
+        } = this.props;
 
-        const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
+        const {
+            containerClassName,
+            inputClassName,
+            labelClassName
+        } = this.getClassNames();
         const { label, placeholder, helpText, error } = this.getMessages();
         const hasError = this.hasError();
 
         return (
             <FormGroup className={containerClassName}>
                 <Label for={name} className={labelClassName}>
-                    {label}   
+                    {label}
                 </Label>
                 <Input
                     className={inputClassName}
@@ -61,28 +71,26 @@ export default class Select extends React.Component {
                         {helpText}
                     </FormText>
                 )}
-                <FormFeedback>
-                    {error}
-                </FormFeedback>
+                <FormFeedback>{error}</FormFeedback>
             </FormGroup>
         );
     }
 
-    renderOptions = ({ value, text }, index) => { 
+    renderOptions = ({ value, text }, index) => {
         const { translate, input: { name } } = this.props;
 
         return (
             <option key={`option.${index}`} value={value}>
                 {` ${translate(name, `option.${index}`, text)}`}
             </option>
-        )
+        );
     };
 
-    hasError = _ => this.props.meta.error && this.props.meta.touched;    
-    
+    hasError = _ => this.props.meta.error && this.props.meta.touched;
+
     getClassNames() {
         const { meta: { error, touched }, big, small, col } = this.props;
-    
+
         return {
             containerClassName: css({ [`col-md-${col}`]: !!col }),
             labelClassName: 'col-form-label',
@@ -93,11 +101,18 @@ export default class Select extends React.Component {
                 'is-valid': !error && touched
             })
         };
-    };
-    
+    }
+
     getMessages() {
-        const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
-    
+        const {
+            input: { name },
+            meta: { error },
+            placeholder,
+            helpText,
+            label,
+            translate
+        } = this.props;
+
         return {
             //error in meta should be the key of the message to translate
             placeholder: translate(name, 'placeholder', placeholder),
@@ -105,5 +120,5 @@ export default class Select extends React.Component {
             label: translate(name, 'label', label),
             error: translate(name, error, error)
         };
-    };
+    }
 }

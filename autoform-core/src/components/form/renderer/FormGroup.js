@@ -21,11 +21,16 @@ export default class FormGroupRenderer extends React.PureComponent {
         const { component, displayName, uiFactory, ...rest } = this.props;
 
         if (displayName !== 'FormGroup') {
-            throw Error(`${[displayName]} is expected to be a 'FormGroup' when using <FormGroupRenderer />`);
+            throw Error(
+                `${[
+                    displayName
+                ]} is expected to be a 'FormGroup' when using <FormGroupRenderer />`
+            );
         }
 
         return <FormDataAccessor render={this.renderComponent(rest)} />;
     }
 
-    renderComponent = rest => props => this.props.uiFactory[this.props.component]({ ...rest, ...props });
+    renderComponent = rest => props =>
+        this.props.uiFactory[this.props.component]({ ...rest, ...props });
 }

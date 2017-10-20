@@ -8,8 +8,8 @@ export default class FormGroup extends React.Component {
         style: PropTypes.object,
         className: PropTypes.string,
         component: PropTypes.string,
-        name: PropTypes.string.isRequired,
-    }; 
+        name: PropTypes.string.isRequired
+    };
 
     render() {
         return this.props.children;

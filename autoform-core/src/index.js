@@ -5,4 +5,11 @@ import AutoFormSubmit from './components/form/FormSubmit';
 import AutoFormFieldArray from './components/form/FormFieldArray';
 import AutoFormFieldEntity from './components/form/FormFieldEntity';
 
-export { AutoForm, AutoFormField, AutoFormGroup, AutoFormSubmit, AutoFormFieldArray, AutoFormFieldEntity };
+export {
+    AutoForm,
+    AutoFormField,
+    AutoFormGroup,
+    AutoFormSubmit,
+    AutoFormFieldArray,
+    AutoFormFieldEntity
+};

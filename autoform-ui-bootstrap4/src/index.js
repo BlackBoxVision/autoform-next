@@ -40,5 +40,5 @@ export default {
     CheckBox: props => <CheckBox {...props} />,
     Select: props => <Select {...props} />,
     Button: props => <Button {...props} />,
-    Radio: props => <Radio {...props} />,
+    Radio: props => <Radio {...props} />
 };

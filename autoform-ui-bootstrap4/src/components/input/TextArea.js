@@ -30,16 +30,26 @@ export default class TextArea extends React.Component {
     };
 
     render() {
-        const { input: { name, ...rest }, type, children, readOnly, rows } = this.props;
+        const {
+            input: { name, ...rest },
+            type,
+            children,
+            readOnly,
+            rows
+        } = this.props;
 
-        const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
+        const {
+            containerClassName,
+            inputClassName,
+            labelClassName
+        } = this.getClassNames();
         const { label, placeholder, helpText, error } = this.getMessages();
         const hasError = this.hasError();
 
         return (
             <FormGroup className={containerClassName}>
                 <Label for={name} className={labelClassName}>
-                    {label} 
+                    {label}
                 </Label>
                 <Input
                     className={inputClassName}
@@ -59,9 +69,7 @@ export default class TextArea extends React.Component {
                         {helpText}
                     </FormText>
                 )}
-                <FormFeedback>
-                    {error}
-                </FormFeedback>
+                <FormFeedback>{error}</FormFeedback>
             </FormGroup>
         );
     }
@@ -82,10 +90,17 @@ export default class TextArea extends React.Component {
                 [`col-md-${col}`]: !!col
             })
         };
-    };
+    }
 
     getMessages() {
-        const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
+        const {
+            input: { name },
+            meta: { error },
+            placeholder,
+            helpText,
+            label,
+            translate
+        } = this.props;
 
         return {
             //error in meta should be the key of the message to translate
@@ -94,5 +109,5 @@ export default class TextArea extends React.Component {
             label: translate(name, 'label', label),
             error: translate(name, error, error)
         };
-    };
+    }
 }

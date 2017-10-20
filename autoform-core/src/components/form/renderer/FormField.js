@@ -34,7 +34,10 @@ export default class FormFieldRenderer extends React.PureComponent {
         }
     }
 
-    renderField = rest => <FormDataAccessor render={this.renderComponent(rest)} />;
+    renderField = rest => (
+        <FormDataAccessor render={this.renderComponent(rest)} />
+    );
 
-    renderComponent = rest => props => this.props.uiFactory[this.props.component]({ ...rest, ...props });
+    renderComponent = rest => props =>
+        this.props.uiFactory[this.props.component]({ ...rest, ...props });
 }

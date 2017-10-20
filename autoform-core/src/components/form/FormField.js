@@ -9,7 +9,7 @@ export default class FormField extends React.Component {
         className: PropTypes.string,
         component: PropTypes.string,
         name: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
     };
 
     render() {

@@ -27,7 +27,9 @@ export default class FormDataProvider extends React.Component {
 
     render() {
         return (
-            <I18nextProvider i18n={this.props.i18n}>{React.Children.only(this.props.children)}</I18nextProvider>
+            <I18nextProvider i18n={this.props.i18n}>
+                {React.Children.only(this.props.children)}
+            </I18nextProvider>
         );
     }
 }

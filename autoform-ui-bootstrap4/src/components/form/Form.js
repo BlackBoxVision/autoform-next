@@ -2,7 +2,7 @@ import React from 'react';
 import css from 'classnames';
 import PropTypes from 'prop-types';
 
-import { Form as BoostrapForm } from 'reactstrap'; 
+import { Form as BoostrapForm } from 'reactstrap';
 
 export default class Form extends React.Component {
     static displayName = 'Form';
@@ -18,7 +18,18 @@ export default class Form extends React.Component {
     };
 
     render() {
-        const { children, inline, title, translate, name, isDebugEnabled, uiFactory, reduxFormProps, t, ...rest } = this.props;
+        const {
+            children,
+            inline,
+            title,
+            translate,
+            name,
+            isDebugEnabled,
+            uiFactory,
+            reduxFormProps,
+            t,
+            ...rest
+        } = this.props;
 
         return (
             <BoostrapForm className={css({ 'form-inline': inline })} {...rest}>

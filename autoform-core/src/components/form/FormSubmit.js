@@ -7,12 +7,12 @@ export default class FormSubmit extends React.Component {
     static propTypes = {
         component: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired
-    }
+    };
 
     static defaultProps = {
-        component: "Button",
-        type: "submit"
-    }
+        component: 'Button',
+        type: 'submit'
+    };
 
     render() {
         return this.props.children;

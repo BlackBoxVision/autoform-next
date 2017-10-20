@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./lib",
-    "compile": "babel ./src -d ./lib"
+    "compile": "babel ./src -d ./lib",
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 80 --single-quote --write 'src/**/**/*.js'"
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
@@ -22,6 +23,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "prettier": "^1.7.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-transition-group": "^2.2.1",

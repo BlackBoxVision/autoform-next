@@ -56,10 +56,21 @@ export default class FormHelper {
         });
     }
 
-    static getChildren({ schema, children, uiFactory }, renderGroup, renderField) {
-        const newChildren = schema ? SchemaCompat.asReactChildren(schema) : children;
+    static getChildren(
+        { schema, children, uiFactory },
+        renderGroup,
+        renderField
+    ) {
+        const newChildren = schema
+            ? SchemaCompat.asReactChildren(schema)
+            : children;
 
-        return FormHelper._renderChildren(newChildren, uiFactory, renderGroup, renderField);
+        return FormHelper._renderChildren(
+            newChildren,
+            uiFactory,
+            renderGroup,
+            renderField
+        );
     }
 
     static getI18n({ locale, fallbackLocale, translations }) {
@@ -96,7 +107,10 @@ export default class FormHelper {
         ];
 
         const formReducer = (accum, reduxFormProp) => {
-            if (props.hasOwnProperty(reduxFormProp) && props[reduxFormProp] !== undefined) {
+            if (
+                props.hasOwnProperty(reduxFormProp) &&
+                props[reduxFormProp] !== undefined
+            ) {
                 accum[reduxFormProp] = props[reduxFormProp];
             }
 

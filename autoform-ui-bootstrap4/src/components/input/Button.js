@@ -12,11 +12,25 @@ export default class SubmitButton extends React.Component {
     };
 
     render() {
-        const { label, isDebugEnabled, reduxFormProps, uiFactory, translate, fullWidth, t, ...rest } = this.props;
+        const {
+            label,
+            isDebugEnabled,
+            reduxFormProps,
+            uiFactory,
+            translate,
+            fullWidth,
+            t,
+            ...rest
+        } = this.props;
 
         return (
             <FormGroup>
-                <Button className={css({ "col-md-12": fullWidth })} color="primary" type="submit" {...rest}>
+                <Button
+                    className={css({ 'col-md-12': fullWidth })}
+                    color="primary"
+                    type="submit"
+                    {...rest}
+                >
                     {translate('submit', 'label', label)}
                 </Button>
             </FormGroup>

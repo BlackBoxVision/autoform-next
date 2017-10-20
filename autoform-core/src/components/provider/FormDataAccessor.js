@@ -31,7 +31,7 @@ class FormDataAccessor extends React.Component {
         }
 
         return text;
-    }
+    };
 }
 
 export default translate()(FormDataAccessor);

@@ -31,9 +31,19 @@ export default class FileInput extends React.Component {
     };
 
     render() {
-        const { input: { name, value, ...rest }, multiple, type, children, readOnly } = this.props;
+        const {
+            input: { name, value, ...rest },
+            multiple,
+            type,
+            children,
+            readOnly
+        } = this.props;
 
-        const { containerClassName, inputClassName, labelClassName } = this.getClassNames();
+        const {
+            containerClassName,
+            inputClassName,
+            labelClassName
+        } = this.getClassNames();
         const { label, placeholder, helpText, error } = this.getMessages();
         const hasError = this.hasError();
 
@@ -60,14 +70,12 @@ export default class FileInput extends React.Component {
                         {helpText}
                     </FormText>
                 )}
-                <FormFeedback>
-                    {error}
-                </FormFeedback>
+                <FormFeedback>{error}</FormFeedback>
             </FormGroup>
         );
     }
 
-    hasError = _ => this.props.meta.error && this.props.meta.touched;    
+    hasError = _ => this.props.meta.error && this.props.meta.touched;
 
     getClassNames() {
         const { meta: { error, touched }, big, small, col } = this.props;
@@ -82,10 +90,17 @@ export default class FileInput extends React.Component {
                 'is-valid': !error && touched
             })
         };
-    };
+    }
 
     getMessages() {
-        const { input: { name }, meta: { error }, placeholder, helpText, label, translate } = this.props;
+        const {
+            input: { name },
+            meta: { error },
+            placeholder,
+            helpText,
+            label,
+            translate
+        } = this.props;
 
         return {
             //error in meta should be the key of the message to translate
@@ -94,5 +109,5 @@ export default class FileInput extends React.Component {
             label: translate(name, 'label', label),
             error: translate(name, error, error)
         };
-    };
+    }
 }

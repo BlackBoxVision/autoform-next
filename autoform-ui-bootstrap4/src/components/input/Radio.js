@@ -20,18 +20,14 @@ export default class Radio extends React.Component {
     };
 
     render() {
-        const { input: { name, ...rest }, options} = this.props;
+        const { input: { name, ...rest }, options } = this.props;
         const { inputClassName, labelClassName } = this.getClassNames();
         const { label, helpText } = this.getMessages();
 
         return (
             <FormGroup className={inputClassName}>
-                <Label className={labelClassName}>
-                    {label}  
-                </Label>
-                <fieldset {...rest}>
-                    {options.map(this.renderRadio)}
-                </fieldset>
+                <Label className={labelClassName}>{label}</Label>
+                <fieldset {...rest}>{options.map(this.renderRadio)}</fieldset>
                 {helpText && (
                     <FormText id={name} color="muted">
                         {helpText}
@@ -42,8 +38,8 @@ export default class Radio extends React.Component {
     }
 
     renderRadio = ({ value, text }, index) => {
-        const { input: { name }, type, translate } = this.props;     
-        const { radioClassName } = this.getClassNames();   
+        const { input: { name }, type, translate } = this.props;
+        const { radioClassName } = this.getClassNames();
 
         return (
             <FormGroup key={`radio.${index}`} className={radioClassName} check>
@@ -55,11 +51,17 @@ export default class Radio extends React.Component {
         );
     };
 
-    hasError = _ => this.props.meta.error && this.props.meta.touched;    
-    
+    hasError = _ => this.props.meta.error && this.props.meta.touched;
+
     getClassNames() {
-        const { meta: { error, touched }, big, small, col, fullWidth } = this.props;
-    
+        const {
+            meta: { error, touched },
+            big,
+            small,
+            col,
+            fullWidth
+        } = this.props;
+
         return {
             containerClassName: css({ [`col-md-${col}`]: !!col }),
             labelClassName: 'col-form-label',
@@ -70,21 +72,19 @@ export default class Radio extends React.Component {
                 'is-valid': !error && touched,
                 [`col-md-${col}`]: !!col
             }),
-            radioClassName: css({ 
-                'col-md-12': fullWidth 
+            radioClassName: css({
+                'col-md-12': fullWidth
             })
         };
-    };
-    
+    }
+
     getMessages() {
         const { input: { name }, label, helpText, translate } = this.props;
-    
+
         return {
             //error in meta should be the key of the message to translate
             helpText: translate(name, 'helpText', helpText),
             label: translate(name, 'label', label)
         };
-    };
+    }
 }
-
-
