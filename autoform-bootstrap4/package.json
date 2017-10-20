@@ -4,5 +4,15 @@
   "description": "AutoForm Bootstrap 4 components ",
   "main": "src/index.js",
   "author": "Jonatan E. Salas",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.0.0-beta",
+    "classnames": "^2.2.5"
+  },
+  "devDependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^4.8.0"
+  }
 }

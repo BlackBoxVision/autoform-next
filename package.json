@@ -10,6 +10,6 @@
   "workspaces": [
     "autoform-core",
     "autoform-example",
-    "autoform-boostrap4"
+    "autoform-bootstrap4"
   ]
 }

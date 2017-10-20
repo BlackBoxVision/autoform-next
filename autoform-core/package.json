@@ -4,5 +4,12 @@
   "description": "Core components for AutoForm",
   "main": "src/index.js",
   "author": "Jonatan E. Salas",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "i18next": "^10.0.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-i18next": "^6.0.6",
+    "redux-form": "^7.1.1"
+  }
 }
