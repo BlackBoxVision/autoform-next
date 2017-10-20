@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { AutoForm, AutoFormField, AutoFormGroup, AutoFormSubmit } from 'autoform-core';
-import Bootstrap4 from 'autoform-bootstrap4';
+import Bootstrap4 from 'autoform-ui-bootstrap4';
 
 import translations from './messages';
 import createArr from './utils';

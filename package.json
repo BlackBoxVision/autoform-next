@@ -11,8 +11,8 @@
     "example-web",
     "example-native",
     "autoform-core",
-    "autoform-native",
-    "autoform-bootstrap4",
+    "autoform-ui-native",
+    "autoform-ui-bootstrap4",
     "website"
   ]
 }

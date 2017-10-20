@@ -1,10 +1,10 @@
 {
-  "name": "autoform-web-example",
+  "name": "example-web",
   "description": "Example AutoForm app",
   "version": "0.0.11",
   "dependencies": {
     "autoform-core": "1.0.0",
-    "autoform-bootstrap4": "1.0.0",
+    "autoform-ui-bootstrap4": "1.0.0",
     "bootstrap": "4.0.0-beta",
     "classnames": "^2.2.5",
     "i18next": "^10.0.1",
