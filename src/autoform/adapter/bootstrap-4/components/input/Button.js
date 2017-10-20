@@ -12,7 +12,7 @@ export default class SubmitButton extends React.Component {
     };
 
     render() {
-        const { label, isDebugEnabled, formProps, uiFactory, translate, fullWidth, t, ...rest } = this.props;
+        const { label, isDebugEnabled, reduxFormProps, uiFactory, translate, fullWidth, t, ...rest } = this.props;
 
         return (
             <FormGroup>

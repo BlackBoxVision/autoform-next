@@ -16,7 +16,7 @@ class FormDataAccessor extends React.Component {
     render() {
         return this.props.render({
             isDebugEnabled: this.context.isDebugEnabled,
-            formProps: this.context.formProps,
+            reduxFormProps: this.context.formProps,
             uiFactory: this.context.uiFactory,
             translate: this.patchTranslate,
             t: this.props.t
