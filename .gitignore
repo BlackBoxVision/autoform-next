@@ -6,6 +6,9 @@ autoform-core/node_modules
 autoform-example/node_modules
 autoform-bootstrap4/node_modules
 
+autoform-core/lib
+autoform-bootstrap4/lib
+
 # testing
 /coverage
 
