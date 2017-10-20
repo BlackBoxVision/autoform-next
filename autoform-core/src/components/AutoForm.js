@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
+import FormHelper from '../helper';
+
 import ErrorBoundary from './error/ErrorBoundary';
 import FormFieldRenderer from './form/renderer/FormField';
 import FormGroupRenderer from './form/renderer/FormGroup';
 import FormDataProvider from './provider/FormDataProvider';
 import FormDataAccessor from './provider/FormDataAccessor';
 
-import FormHelper from '../helper';
-
-class AutoForm extends React.PureComponent {
+@reduxForm()
+export default class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
 
     static propTypes = {
@@ -108,6 +109,3 @@ class AutoForm extends React.PureComponent {
 
     renderField = (props, index) => <FormFieldRenderer key={`field-renderer.${index}`} {...props} />;
 }
-
-//TODO move to decorator
-export default reduxForm()(AutoForm);
