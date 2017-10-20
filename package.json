@@ -8,10 +8,11 @@
   "author": "Jonatan E. Salas",
   "license": "MIT",
   "workspaces": [
+    "example-web",
+    "example-native",
     "autoform-core",
     "autoform-native",
     "autoform-bootstrap4",
-    "autoform-web-example",
-    "autoform-native-example"
+    "website"
   ]
 }
