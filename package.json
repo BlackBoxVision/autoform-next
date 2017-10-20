@@ -9,7 +9,9 @@
   "license": "MIT",
   "workspaces": [
     "autoform-core",
-    "autoform-example",
-    "autoform-bootstrap4"
+    "autoform-native",
+    "autoform-bootstrap4",
+    "autoform-web-example",
+    "autoform-native-example"
   ]
 }
