@@ -2,7 +2,9 @@
   "name": "autoform-core",
   "version": "1.0.0",
   "description": "Core components for AutoForm",
-  "main": "lib/index.js",
+  "main": "lib/autoform-core.cjs.js",
+  "module": "lib/autoform-core.esm.js",
+  "browser": "lib/autoform-core.umd.js",
   "author": "Jonatan E. Salas",
   "license": "MIT",
   "scripts": {
@@ -26,6 +28,13 @@
     "react": "^16.0.0",
     "react-i18next": "^6.0.6",
     "redux-form": "^7.1.1",
-    "rimraf": "^2.6.2"
-  }
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.4",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "files": [
+    "lib"
+  ]
 }

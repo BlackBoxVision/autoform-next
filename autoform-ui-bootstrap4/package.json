@@ -2,7 +2,9 @@
   "name": "autoform-ui-bootstrap4",
   "version": "1.0.0",
   "description": "AutoForm Bootstrap 4 components ",
-  "main": "lib/index.js",
+  "main": "lib/autoform-ui-bootstrap4.cjs.js",
+  "module": "lib/autoform-ui-bootstrap4.esm.js",
+  "browser": "lib/autoform-ui-bootstrap4.umd.js",
   "author": "Jonatan E. Salas",
   "license": "MIT",
   "scripts": {
@@ -28,6 +30,13 @@
     "react": "^16.0.0",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
-    "rimraf": "^2.6.2"
-  }
+    "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.4",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "files": [
+    "lib"
+  ]
 }
