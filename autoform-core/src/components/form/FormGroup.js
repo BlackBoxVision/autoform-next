@@ -12,6 +12,6 @@ export default class FormGroup extends React.Component {
     };
 
     render() {
-        return this.props.children;
+        return false;
     }
 }

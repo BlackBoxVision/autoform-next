@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 import Core from 'autoform-core';
 import Bootstrap4 from 'autoform-ui-bootstrap4';

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import AutoForm from './components/AutoForm';
 import AutoFormField from './components/form/FormField';
 import AutoFormGroup from './components/form/FormGroup';

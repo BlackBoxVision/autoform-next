@@ -15,6 +15,6 @@ export default class FormSubmit extends React.Component {
     };
 
     render() {
-        return this.props.children;
+        return false;
     }
 }

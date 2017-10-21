@@ -13,6 +13,6 @@ export default class FormField extends React.Component {
     };
 
     render() {
-        return this.props.children;
+        return false;
     }
 }
