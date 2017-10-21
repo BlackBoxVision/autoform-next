@@ -6,29 +6,23 @@ import pkg from './package.json';
 
 export default [
     {
-		entry: 'src/index.js',
-		dest: pkg.browser,
-		format: 'umd',
-		plugins: [
-            resolve(), 
-            babel({ runtimeHelpers: true }),
-			commonjs() 
-		]
+        entry: 'src/index.js',
+        dest: pkg.browser,
+        format: 'umd',
+        plugins: [resolve(), babel({ runtimeHelpers: true }), commonjs()]
     },
     {
-		entry: 'src/index.js',
-		targets: [
-			{ 
-                dest: pkg.main, 
+        entry: 'src/index.js',
+        targets: [
+            {
+                dest: pkg.main,
                 format: 'cjs'
             },
-			{
-                dest: pkg.module, 
-                format: 'es' 
+            {
+                dest: pkg.module,
+                format: 'es'
             }
         ],
-        plugins: [
-            babel({ runtimeHelpers: true })
-		]
-	}
+        plugins: [babel({ runtimeHelpers: true })]
+    }
 ];

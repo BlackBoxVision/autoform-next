@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf ./lib",
     "compile": "babel ./src -d ./lib",
-    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 80 --single-quote --write 'src/**/**/*.js'"
+    "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 80 --single-quote --write './**/**/**/*.js'"
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
