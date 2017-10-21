@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, FieldArray, Fields } from 'redux-form';
 
 import FormDataAccessor from '../../provider/FormDataAccessor';
-import { Component } from '../../../helper';
+import { Component } from '../../../helper/form';
 
 //TODO add validations
 export default class FormFieldRenderer extends React.PureComponent {

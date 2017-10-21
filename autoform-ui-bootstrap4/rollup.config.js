@@ -1,4 +1,3 @@
-import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 
@@ -6,24 +5,38 @@ import pkg from './package.json';
 
 export default [
     {
-        entry: 'src/index.js',
-        dest: pkg.browser,
-        format: 'umd',
-        plugins: [resolve(), babel({ runtimeHelpers: true }), commonjs()]
+        name: 'autoform-ui-bootstrap4',
+        input: 'src/index.js',
+        output: {
+            file: pkg.browser,
+            format: 'umd',
+        },
+        external: ['react'],
+        plugins: [babel({ runtimeHelpers: true }), commonjs({
+            exclude: [
+              'node_modules/react/**',
+              'node_modules/react-dom/**'
+            ]
+        })]
     },
     {
-        entry: 'src/index.js',
-        external: Object.keys(pkg.dependencies),
-        targets: [
+        input: 'src/index.js',
+        output: [
             {
-                dest: pkg.main,
+                file: pkg.main,
                 format: 'cjs'
             },
             {
-                dest: pkg.module,
+                file: pkg.module,
                 format: 'es'
             }
         ],
-        plugins: [babel({ runtimeHelpers: true })]
+        external: ['react'],
+        plugins: [babel({ runtimeHelpers: true }), commonjs({
+            exclude: [
+              'node_modules/react/**',
+              'node_modules/react-dom/**'
+            ]
+        })]
     }
 ];

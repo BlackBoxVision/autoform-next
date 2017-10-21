@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import SchemaCompat from '../compat';
+import SchemaCompat from '../compat/schema';
 
 export const Component = {
     GROUP: 'FormGroup',

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, propTypes } from 'redux-form';
 
-import FormHelper from '../helper';
+import FormHelper from '../helper/form';
 
 import ErrorBoundary from './error/ErrorBoundary';
 import FormFieldRenderer from './form/renderer/FormField';
@@ -10,8 +10,7 @@ import FormGroupRenderer from './form/renderer/FormGroup';
 import FormDataProvider from './provider/FormDataProvider';
 import FormDataAccessor from './provider/FormDataAccessor';
 
-@reduxForm()
-export default class AutoForm extends React.PureComponent {
+class AutoForm extends React.PureComponent {
     static displayName = 'AutoForm';
 
     static propTypes = {
@@ -130,3 +129,5 @@ export default class AutoForm extends React.PureComponent {
         <FormFieldRenderer key={`field-renderer.${index}`} {...props} />
     );
 }
+
+export default reduxForm()(AutoForm);
