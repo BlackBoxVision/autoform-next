@@ -33,7 +33,7 @@ export default [
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
-            minify()
+            //minify()
         ]
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -64,7 +64,7 @@ export default [
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
-            minify()
+            //minify()
         ]
     }
 ];

@@ -2,11 +2,11 @@ import i18next from 'i18next';
 import SchemaCompat from '../compat/schema';
 
 export const Component = {
-    GROUP: 'FormGroup',
-    FIELD: 'FormField',
-    SUBMIT: 'FormSubmit',
-    FIELD_ARRAY: 'FormFieldArray',
-    FIELD_ENTITY: 'FormFieldEntity'
+    GROUP: 'AutoFormGroup',
+    FIELD: 'AutoFormField',
+    SUBMIT: 'AutoFormSubmit',
+    FIELD_ARRAY: 'AutoFormFieldArray',
+    FIELD_ENTITY: 'AutoFormFieldEntity'
 };
 
 export default class FormHelper {
@@ -22,19 +22,19 @@ export default class FormHelper {
         return FormHelper.childrenToArray(children).map((element, index) => {
             const { props, type } = element;
 
-            if (type.hasOwnProperty('displayName')) {
-                switch (type.displayName) {
+            if (type.hasOwnProperty('name')) {
+                switch (type.name) {
                     case Component.GROUP:
                         const groupProps = {
                             ...props,
-                            uiFactory,
-                            displayName: type.displayName,
+                            displayName: type.name.replace('Auto', ''),
                             children: FormHelper._renderChildren(
                                 props.children,
                                 uiFactory,
                                 renderGroup,
                                 renderField
-                            )
+                            ),
+                            uiFactory
                         };
 
                         return renderGroup(groupProps, index);
@@ -42,8 +42,8 @@ export default class FormHelper {
                     case Component.SUBMIT:
                         const fieldProps = {
                             ...props,
+                            displayName: type.name.replace('Auto', ''),
                             uiFactory,
-                            displayName: type.displayName
                         };
 
                         return renderField(fieldProps, index);

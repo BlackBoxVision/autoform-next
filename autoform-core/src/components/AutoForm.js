@@ -99,14 +99,14 @@ class AutoForm extends React.Component {
     }
 
     renderForm = props => {
-        const { handleSubmit, onSubmit, title, form } = this.props;
+        const { handleSubmit, onSubmit, title, form, children } = this.props;
 
+        const Form = FormHelper.getForm(this.props);
         const formChildren = FormHelper.getChildren(
             this.props,
             this.renderGroup,
             this.renderField
         );
-        const Form = FormHelper.getForm(this.props);
 
         return (
             <Form
