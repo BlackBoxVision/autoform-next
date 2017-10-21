@@ -1,41 +1,45 @@
-import resolve from 'rollup-plugin-node-resolve';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import minify from 'rollup-plugin-babel-minify';
 import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
 import babel from 'rollup-plugin-babel';
 
 import pkg from './package.json';
 
 export default [
-	// browser-friendly UMD build
+    // browser-friendly UMD build
     {
-        name: 'autoForm',
+        name: 'AutoFormCore',
         input: 'src/index.js',
         output: {
             file: pkg.browser,
             format: 'umd'
         },
-        external: ['react'],
+        external: ['react', 'react-dom', 'i18next', 'react-i18next', 'redux-form'],
         globals: {
-            react: 'React'
+            react: 'React',
+            'i18next': 'i18next',
+            'react-dom': 'ReactDOM',
+            'redux-form': 'reduxForm',
+            'react-i18next': 'reactI18next'
         },
         plugins: [
-            resolve(),
+            nodeResolve(),
             babel({ 
                 runtimeHelpers: true,
                 exclude: ['node_modules/**']
             }),
-            commonjs({
-                exclude: [
-                'node_modules/react/**',
-                'node_modules/react-dom/**'
-                ]
-            })
+            commonjs(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
         ]
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
-	// (We could have three entries in the configuration array
-	// instead of two, but it's quicker to generate multiple
-	// builds from a single configuration where possible, using
-	// the `output` option which can specify `file` and `format`)
+    // (We could have three entries in the configuration array
+    // instead of two, but it's quicker to generate multiple
+    // builds from a single configuration where possible, using
+    // the `output` option which can specify `file` and `format`)
     {
         input: 'src/index.js',
         output: [
@@ -48,19 +52,17 @@ export default [
                 format: 'es'
             }
         ],
-        external: ['react'],
+        external: ['react', 'react-dom', 'i18next', 'react-i18next', 'redux-form'],
         plugins: [
-            resolve(),
+            nodeResolve(),
             babel({ 
                 runtimeHelpers: true,
                 exclude: ['node_modules/**']
             }),
-            commonjs({
-                exclude: [
-                'node_modules/react/**',
-                'node_modules/react-dom/**'
-                ]
-            })
+            commonjs(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
         ]
     }
 ];

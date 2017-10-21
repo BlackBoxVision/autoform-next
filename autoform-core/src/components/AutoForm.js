@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm, propTypes } from 'redux-form';
+import { reduxForm } from 'redux-form';
 
 import FormHelper from '../helper/form';
 
@@ -10,11 +10,10 @@ import FormGroupRenderer from './form/renderer/FormGroup';
 import FormDataProvider from './provider/FormDataProvider';
 import FormDataAccessor from './provider/FormDataAccessor';
 
-class AutoForm extends React.PureComponent {
+class AutoForm extends React.Component {
     static displayName = 'AutoForm';
 
     static propTypes = {
-        ...propTypes,
         debug: PropTypes.bool,
         schema: PropTypes.any,
         children: PropTypes.any,

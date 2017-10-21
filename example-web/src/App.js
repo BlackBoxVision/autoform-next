@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AutoForm, AutoFormField, AutoFormGroup, AutoFormSubmit } from 'autoform-core';
+import Core from 'autoform-core';
 import Bootstrap4 from 'autoform-ui-bootstrap4';
 
 import translations from './messages';
@@ -24,6 +24,9 @@ export default class App extends React.Component {
             es: "Selecciona un lenguaje"
         }
 
+        console.info("AutoForm Core", Core);
+        console.info("AutoForm Bootstrap 4", Bootstrap4);
+    
         return (
             <div className="container">
                 <br />
@@ -40,7 +43,7 @@ export default class App extends React.Component {
                 <br />
                 <div className="card">
                     <div className="container">
-                        <AutoForm
+                        <Core.AutoForm
                             form="contactForm"
                             title="Contact Form"
                             uiFactory={Bootstrap4}
@@ -49,14 +52,14 @@ export default class App extends React.Component {
                             translations={translations}
                             onSubmit={this.handleSubmit}
                         >
-                            <AutoFormGroup name="gender">
-                                <AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" fullWidth />
-                                <AutoFormField name="isWoman" label="Are you a Woman?" component="CheckBox" fullWidth />
-                            </AutoFormGroup>
-                            <AutoFormGroup name="personal">
-                                <AutoFormField name="name" label="Name" col={5} helpText />
-                                <AutoFormField name="surname" label="Surname" col={5} helpText />
-                                <AutoFormField
+                            <Core.AutoFormGroup name="gender">
+                                <Core.AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" fullWidth />
+                                <Core.AutoFormField name="isWoman" label="Are you a Woman?" component="CheckBox" fullWidth />
+                            </Core.AutoFormGroup>
+                            <Core.AutoFormGroup name="personal">
+                                <Core.AutoFormField name="name" label="Name" col={5} helpText />
+                                <Core.AutoFormField name="surname" label="Surname" col={5} helpText />
+                                <Core.AutoFormField
                                     col={2}
                                     name="age"
                                     label="Age"
@@ -64,7 +67,7 @@ export default class App extends React.Component {
                                     options={createArr(100)}
                                     helpText
                                 />
-                                <AutoFormField
+                                <Core.AutoFormField
                                     col={2}
                                     name="number"
                                     label="Number"
@@ -72,17 +75,17 @@ export default class App extends React.Component {
                                     options={createArr(5)}
                                     helpText="This is some help text"
                                 />
-                            </AutoFormGroup>
-                            <AutoFormGroup name="location">
-                                <AutoFormField name="address" label="Address" col={7} helpText />
-                                <AutoFormField name="city" label="City" col={5} helpText />
-                            </AutoFormGroup>
-                            <AutoFormGroup name="additional">
-                                <AutoFormField name="comment" label="Comment" component="TextArea" rows={4} col={12} helpText />
-                            </AutoFormGroup>
-                            <AutoFormSubmit label="Submit Form!" fullWidth />
+                            </Core.AutoFormGroup>
+                            <Core.AutoFormGroup name="location">
+                                <Core.AutoFormField name="address" label="Address" col={7} helpText />
+                                <Core.AutoFormField name="city" label="City" col={5} helpText />
+                            </Core.AutoFormGroup>
+                            <Core.AutoFormGroup name="additional">
+                                <Core.AutoFormField name="comment" label="Comment" component="TextArea" rows={4} col={12} helpText />
+                            </Core.AutoFormGroup>
+                            <Core.AutoFormSubmit label="Submit Form!" fullWidth />
                             <br />
-                        </AutoForm>
+                        </Core.AutoForm>
                     </div>
                 </div>
                 <br />

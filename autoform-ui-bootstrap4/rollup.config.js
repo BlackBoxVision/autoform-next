@@ -1,5 +1,7 @@
-import resolve from 'rollup-plugin-node-resolve';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import minify from 'rollup-plugin-babel-minify';
 import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
 import babel from 'rollup-plugin-babel';
 
 import pkg from './package.json';
@@ -7,16 +9,17 @@ import pkg from './package.json';
 export default [
 	// browser-friendly UMD build
     {
-        name: 'autoFormBootstrap',
+        name: 'AutoFormBootstrap4',
         input: 'src/index.js',
         output: {
             file: pkg.browser,
             format: 'umd',
         },
-        external: ['react'],
+        external: ['react', 'react-dom', 'reactstrap', 'prop-types'],
         globals: {
             react: 'React',
             css: 'classnames',
+            'react-dom': 'ReactDOM',
             PropTypes: 'prop-types',
             reactstrap: 'reactstrap',
             _extends: 'babel-runtime/helpers/extends',
@@ -29,17 +32,16 @@ export default [
             _possibleConstructorReturn: 'babel-runtime/helpers/possibleConstructorReturn',
         },
         plugins: [
-            resolve(),
+            nodeResolve(),
             babel({ 
                 runtimeHelpers: true,
                 exclude: ['node_modules/**']
             }),
-            commonjs({
-                exclude: [
-                'node_modules/react/**',
-                'node_modules/react-dom/**'
-                ]
-            })
+            commonjs(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
+            minify()
         ]
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -59,19 +61,18 @@ export default [
                 format: 'es'
             }
         ],
-        external: ['react'],
+        external: ['react', 'react-dom', 'reactstrap', 'prop-types'],
         plugins: [
-            resolve(),
+            nodeResolve(),
             babel({ 
                 runtimeHelpers: true,
                 exclude: ['node_modules/**']
             }),
-            commonjs({
-                exclude: [
-                'node_modules/react/**',
-                'node_modules/react-dom/**'
-                ]
-            })
+            commonjs(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
+            minify()
         ]
     }
 ];
