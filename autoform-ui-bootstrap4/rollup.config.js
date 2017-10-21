@@ -15,12 +15,11 @@ export default [
             file: pkg.browser,
             format: 'umd',
         },
-        external: ['react', 'react-dom', 'reactstrap', 'prop-types'],
+        external: ['react', 'react-dom', 'reactstrap'],
         globals: {
             react: 'React',
             css: 'classnames',
             'react-dom': 'ReactDOM',
-            PropTypes: 'prop-types',
             reactstrap: 'reactstrap',
             _extends: 'babel-runtime/helpers/extends',
             _inherits: 'babel-runtime/helpers/inherits',

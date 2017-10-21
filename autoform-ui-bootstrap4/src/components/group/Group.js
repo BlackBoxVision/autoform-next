@@ -13,11 +13,11 @@ export default class Group extends React.Component {
             translate,
             title,
             t,
-            ...props
+            ...rest
         } = this.props;
 
         return (
-            <FormGroup {...props} row>
+            <FormGroup {...rest} row>
                 <div className="col-md-12">
                     <h5>{translate(name, 'title', title)}</h5>
                 </div>
