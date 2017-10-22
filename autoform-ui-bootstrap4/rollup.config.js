@@ -1,6 +1,7 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import minify from 'rollup-plugin-babel-minify';
 import commonjs from 'rollup-plugin-commonjs';
+import fileSize from 'rollup-plugin-filesize';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 import babel from 'rollup-plugin-babel';
@@ -34,14 +35,16 @@ export default [
         plugins: [
             nodeResolve(),
             babel({ 
-                exclude: ['node_modules/**']
+                comments: false,
+                exclude: 'node_modules/**'
             }),
             commonjs(),
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
             minify(),
-            uglify()
+            uglify(),
+            fileSize()
         ]
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -59,14 +62,16 @@ export default [
         plugins: [
             nodeResolve(),
             babel({ 
-                exclude: ['node_modules/**']
+                comments: false,
+                exclude: 'node_modules/**'
             }),
             commonjs(),
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
             minify(),
-            uglify()
+            uglify(),
+            fileSize()
         ]
     },
     {
@@ -79,13 +84,15 @@ export default [
         plugins: [
             nodeResolve(),
             babel({ 
-                exclude: ['node_modules/**']
+                comments: false,
+                exclude: 'node_modules/**'    
             }),
             commonjs(),
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
             minify(),
+            fileSize()
         ]
     }
 ];
