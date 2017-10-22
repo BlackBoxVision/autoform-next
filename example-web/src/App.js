@@ -23,10 +23,7 @@ export default class App extends React.Component {
         const label = {
             en: "Choose a language",
             es: "Selecciona un lenguaje"
-        }
-
-        console.info("AutoForm Core", Core);
-        console.info("AutoForm Bootstrap 4", Bootstrap4);
+        };
     
         return (
             <div className="container">
@@ -84,7 +81,7 @@ export default class App extends React.Component {
                             <Core.AutoFormGroup name="additional">
                                 <Core.AutoFormField name="comment" label="Comment" component="TextArea" rows={4} col={12} helpText />
                             </Core.AutoFormGroup>
-                            <Core.AutoFormSubmit label="Submit Form!" fullWidth />
+                            <Core.AutoFormSubmit label="Submit Form!" component="Button" fullWidth />
                             <br />
                         </Core.AutoForm>
                     </div>

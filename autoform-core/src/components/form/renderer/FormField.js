@@ -22,22 +22,21 @@ export default class FormFieldRenderer extends React.PureComponent {
     render() {
         const { component, displayName, uiFactory, ...rest } = this.props;
 
+        console.info("FormFieldRenderer Props ->", rest);
+
         switch (displayName) {
             case Component.FIELD:
-                return <Field component={this.renderField} {...rest} />;
+                return <Field name={rest.name} component={this.renderField} {...rest} />;
             case Component.FIELD_ARRAY:
-                return <FieldArray component={this.renderField} {...rest} />;
+                return <FieldArray name={rest.name} component={this.renderField} {...rest} />;
             case Component.FIELD_ENTITY:
-                return <Fields component={this.renderField} {...rest} />;
+                return <Fields name={rest.name} component={this.renderField} {...rest} />;
             default:
                 return this.renderField(rest);
         }
     }
 
     renderField = rest => (
-        <FormDataAccessor render={this.renderComponent(rest)} />
+        <FormDataAccessor render={props => this.props.uiFactory[this.props.component]({ ...rest, ...props })} />
     );
-
-    renderComponent = rest => props =>
-        this.props.uiFactory[this.props.component]({ ...rest, ...props });
 }

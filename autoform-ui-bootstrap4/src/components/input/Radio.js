@@ -20,14 +20,14 @@ export default class Radio extends React.Component {
     };
 
     render() {
-        const { input: { name, ...rest }, options } = this.props;
+        const { name, input, options } = this.props;
         const { inputClassName, labelClassName } = this.getClassNames();
         const { label, helpText } = this.getMessages();
 
         return (
             <FormGroup className={inputClassName}>
                 <Label className={labelClassName}>{label}</Label>
-                <fieldset {...rest}>{options.map(this.renderRadio)}</fieldset>
+                <fieldset {...input}>{options.map(this.renderRadio)}</fieldset>
                 {helpText && (
                     <FormText id={name} color="muted">
                         {helpText}
@@ -38,7 +38,7 @@ export default class Radio extends React.Component {
     }
 
     renderRadio = ({ value, text }, index) => {
-        const { input: { name }, type, translate } = this.props;
+        const { name, type, translate } = this.props;
         const { radioClassName } = this.getClassNames();
 
         return (
@@ -51,11 +51,11 @@ export default class Radio extends React.Component {
         );
     };
 
-    hasError = _ => this.props.meta.error && this.props.meta.touched;
+    hasError = _ => this.props.meta && this.props.meta.error && this.props.meta.touched;
 
     getClassNames() {
         const {
-            meta: { error, touched },
+            meta,
             big,
             small,
             col,
@@ -68,8 +68,8 @@ export default class Radio extends React.Component {
             inputClassName: css({
                 'form-control-lg': big,
                 'form-control-sm': small,
-                'is-invalid': error && touched,
-                'is-valid': !error && touched,
+                'is-invalid': meta && meta.error && meta.touched,
+                'is-valid': meta && !meta.error && meta.touched,
                 [`col-md-${col}`]: !!col
             }),
             radioClassName: css({
@@ -79,10 +79,11 @@ export default class Radio extends React.Component {
     }
 
     getMessages() {
-        const { input: { name }, label, helpText, translate } = this.props;
+        const { name, meta, label, helpText, translate } = this.props;
 
         return {
             //error in meta should be the key of the message to translate
+            error: meta && translate(name, meta.error, meta.error),
             helpText: translate(name, 'helpText', helpText),
             label: translate(name, 'label', label)
         };

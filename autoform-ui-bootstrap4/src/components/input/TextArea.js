@@ -31,7 +31,8 @@ export default class TextArea extends React.Component {
 
     render() {
         const {
-            input: { name, ...rest },
+            name,
+            input,
             type,
             children,
             readOnly,
@@ -60,7 +61,7 @@ export default class TextArea extends React.Component {
                     rows={rows}
                     type={type}
                     id={name}
-                    {...rest}
+                    {...input}
                 >
                     {children}
                 </Input>
@@ -74,10 +75,10 @@ export default class TextArea extends React.Component {
         );
     }
 
-    hasError = _ => this.props.meta.error && this.props.meta.touched;
+    hasError = _ => this.props.meta && this.props.meta.error && this.props.meta.touched;
 
     getClassNames() {
-        const { meta: { error, touched }, big, small, col } = this.props;
+        const { meta, big, small, col } = this.props;
 
         return {
             containerClassName: css({ [`col-md-${col}`]: !!col }),
@@ -85,8 +86,8 @@ export default class TextArea extends React.Component {
             inputClassName: css({
                 'form-control-lg': big,
                 'form-control-sm': small,
-                'is-invalid': error && touched,
-                'is-valid': !error && touched,
+                'is-invalid': meta && meta.error && meta.touched,
+                'is-valid': meta && !meta.error && meta.touched,
                 [`col-md-${col}`]: !!col
             })
         };
@@ -94,8 +95,8 @@ export default class TextArea extends React.Component {
 
     getMessages() {
         const {
-            input: { name },
-            meta: { error },
+            name,
+            meta,
             placeholder,
             helpText,
             label,
@@ -105,9 +106,9 @@ export default class TextArea extends React.Component {
         return {
             //error in meta should be the key of the message to translate
             placeholder: translate(name, 'placeholder', placeholder),
+            error: meta && translate(name, meta.error, meta.error),
             helpText: translate(name, 'helpText', helpText),
-            label: translate(name, 'label', label),
-            error: translate(name, error, error)
+            label: translate(name, 'label', label)
         };
     }
 }
