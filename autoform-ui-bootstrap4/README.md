@@ -6,7 +6,7 @@ AutoForm UI Bootstrap4 is a package that provides a set of components to work wi
 
 > Take care that this package is currently not presented under NPM Registry.
 
-You can install core from `NPM/YARN`.
+You can install this ui-library from `NPM/YARN`.
 
 #### NPM
 
