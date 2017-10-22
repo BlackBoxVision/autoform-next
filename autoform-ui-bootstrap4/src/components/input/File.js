@@ -31,7 +31,8 @@ export default class FileInput extends React.Component {
     };
 
     render() {
-        const { input: { value, ...newInput }, ...newProps } = this.props;
+        const { input: { value, ...newInput }, ...rest } = this.props;
+        const { translate, t, uiFactory, isDebugEnabled, reduxFormProps, ...newProps } = rest;
 
         return <TextInput input={newInput} {...newProps} />;
     }

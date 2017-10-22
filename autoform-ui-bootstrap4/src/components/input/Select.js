@@ -32,7 +32,8 @@ export default class Select extends React.Component {
     };
 
     render() {
-        const { input, options, multiple, readOnly, type, helpText } = this.props;
+        const { input, options, multiple, readOnly, type, helpText, ...rest } = this.props;
+        const { translate, t, uiFactory, isDebugEnabled, reduxFormProps, big, small, ...newProps } = rest;
         const messages = this.getMessages();
         const classes = this.getClasses();
         const hasError = this.hasError();

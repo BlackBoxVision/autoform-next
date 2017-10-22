@@ -20,7 +20,8 @@ export default class Radio extends React.Component {
     };
 
     render() {
-        const { input, options, helpText } = this.props;
+        const { input, options, helpText, ...rest } = this.props;
+        const { translate, t, uiFactory, isDebugEnabled, reduxFormProps, big, small, ...newProps } = rest;
         const messages = this.getMessages();
         const classes = this.getClasses();
         const name = this.getInputName();

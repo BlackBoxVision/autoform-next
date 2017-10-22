@@ -20,7 +20,8 @@ export default class CheckBox extends React.Component {
     };
 
     render() {
-        const { input, type } = this.props;
+        const { input, type, ...rest } = this.props;
+        const { translate, t, uiFactory, isDebugEnabled, reduxFormProps, big, small, ...newProps } = rest;
         const messages = this.getMessages();
         const classes = this.getClasses();
         const name = this.getInputName();

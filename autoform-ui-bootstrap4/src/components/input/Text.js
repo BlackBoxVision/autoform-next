@@ -30,7 +30,8 @@ export default class TextInput extends React.Component {
     };
 
     render() {
-        const { input, type, children, readOnly, helpText, ...newProps } = this.props;
+        const { input, type, children, readOnly, helpText, ...rest } = this.props;
+        const { translate, t, uiFactory, isDebugEnabled, reduxFormProps, big, small, ...newProps } = rest;
         const messages = this.getMessages();
         const classes = this.getClasses();
         const hasError = this.hasError();
