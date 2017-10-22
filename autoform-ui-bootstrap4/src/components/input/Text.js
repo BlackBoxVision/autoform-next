@@ -8,6 +8,7 @@ export default class TextInput extends React.Component {
     static displayName = 'TextInput';
 
     static propTypes = {
+        rows: PropTypes.number,
         col: PropTypes.number,
         placeholder: PropTypes.string,
         helpText: PropTypes.any,
@@ -29,7 +30,7 @@ export default class TextInput extends React.Component {
     };
 
     render() {
-        const { input, type, children, readOnly, helpText } = this.props;
+        const { input, type, children, readOnly, helpText, ...newProps } = this.props;
         const messages = this.getMessages();
         const classes = this.getClasses();
         const hasError = this.hasError();
@@ -49,6 +50,7 @@ export default class TextInput extends React.Component {
                     type={type}
                     id={name}
                     {...input}
+                    {...newProps}
                 >
                     {children}
                 </Input>
