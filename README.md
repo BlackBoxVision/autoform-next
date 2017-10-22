@@ -1,19 +1,23 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JonatanSalas/autoform-next/master/art/logo/large.png" style="width:100%;height:auto;display:block;"/>
+</p>
+
 ## AutoForm next
 
-AutoForm next is the newer redux-autoform API, it's a fully rewrite of redux-autoform. We've fully remove the metadata processor. Our API is more declarative now!
+`AutoForm next` is the newer `redux-autoform` API, it's a fully rewrite of redux-autoform. We've fully remove the metadata processor. Our API is more declarative now!
 
 ### Benefits of AutoForm-Next over Redux-AutoForm? 
 
-Because it's a fully rewrite, we're working on making everything better. We want redux-autoform to provide a better experience on mobile-devices, avoid innecesary re-renders that produce lags, provide more ui-libraries, etc. 
+Because it's a fully rewrite, we're working on making everything better. We want `redux-autoform` to provide a better experience on mobile-devices, avoid innecesary re-renders that produce lags, provide more ui-libraries, etc. 
 
 The **autoform-next** project benefits are the following ones: 
-- Works with both react v15/v16 (If you've switched to react v16, you'll see a perf diff on mobile-devices)
-- Works on top of redux-form v6/v7 (This is a really good progress! Avoid re-render the form on every change!)
+- Works with both `react v15/v16` (If you've switched to react v16, you'll see a perf diff on mobile-devices)
+- Works on top of `redux-form v6/v7` (This is a really good progress! Avoid re-render the form on every change!)
 - It has a newer way to use, we expose a declarative API, and also let you pass a json schema.
-- Provides i18n support through i18next and i18next-react.
+- Provides i18n support through `i18next` and `i18next-react`.
 - It will provide a wider range of ui-libraries.
 - It will provide support for react-native!
-- Provides ErrorBoundary support! (Because you don't have to break your app anymore!)
+- Provides `ErrorBoundary` support! (Because you don't have to break your app anymore!)
 - Smaller bundle sizes! (Because size matters!)
 
 ### How to get started? 
