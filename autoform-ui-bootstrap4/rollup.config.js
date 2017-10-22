@@ -85,7 +85,7 @@ export default [
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
-            minify()
+            minify(),
         ]
     }
 ];
