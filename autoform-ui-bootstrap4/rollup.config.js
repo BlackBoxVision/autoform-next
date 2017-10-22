@@ -13,6 +13,7 @@ export default [
     {
         name: 'AutoFormBootstrap4',
         input: 'src/index.js',
+        //sourcemap: 'inline',
         output: {
             file: pkg.browser,
             format: 'umd',
@@ -43,7 +44,23 @@ export default [
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
             minify(),
-            uglify(),
+            uglify({
+                output: {
+                    comments: false,
+                    beautify: false
+                },
+                compress: {
+                    drop_console: true,
+                    dead_code: true,
+                    if_return: true,
+                    conditionals: true,
+                    drop_debugger: true,
+                    loops: true,
+                    reduce_vars: true
+                },
+                sourceMap: true,
+                warnings: false        
+            }),
             fileSize()
         ]
     },
@@ -54,6 +71,7 @@ export default [
 	// the `output` option which can specify `file` and `format`)
     {
         input: 'src/index.js',
+        //sourcemap: 'inline',
         output: {
             file: pkg.main,
             format: 'cjs'
@@ -70,12 +88,29 @@ export default [
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
             minify(),
-            uglify(),
+            uglify({
+                output: {
+                    comments: false,
+                    beautify: false
+                },
+                compress: {
+                    drop_console: true,
+                    dead_code: true,
+                    if_return: true,
+                    conditionals: true,
+                    drop_debugger: true,
+                    loops: true,
+                    reduce_vars: true
+                },
+                sourceMap: true,
+                warnings: false        
+            }),
             fileSize()
         ]
     },
     {
         input: 'src/index.js',
+        //sourcemap: 'inline',
         output: {
             file: pkg.module,
             format: 'es'
