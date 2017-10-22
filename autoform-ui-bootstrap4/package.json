@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf ./lib",
-    "compile": "babel ./src -d ./lib",
+    "build": "yarn run clean && rollup -c",
     "prettier": "./node_modules/.bin/prettier --tab-width 4 --print-width 80 --single-quote --write './**/**/**/*.js'"
   },
   "dependencies": {
