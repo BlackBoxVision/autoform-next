@@ -51,8 +51,8 @@ export default class App extends React.Component {
                             onSubmit={this.handleSubmit}
                         >
                             <Core.AutoFormGroup name="gender">
-                                <Core.AutoFormField name="isMan" label="Are you a Man?" component="CheckBox" fullWidth />
-                                <Core.AutoFormField name="isWoman" label="Are you a Woman?" component="CheckBox" fullWidth />
+                                <Core.AutoFormField name="isMan" component="CheckBox" fullWidth />
+                                <Core.AutoFormField name="isWoman" component="CheckBox" fullWidth />
                             </Core.AutoFormGroup>
                             <Core.AutoFormGroup name="personal">
                                 <Core.AutoFormField name="name" label="Name" col={5} helpText />

@@ -20,36 +20,39 @@ export default class CheckBox extends React.Component {
     };
 
     render() {
-        const { name, input, type } = this.props;
-        
-        const { containerClassName } = this.getClassNames();
-        const { label } = this.getMessages();
+        const { input, type } = this.props;
+        const messages = this.getMessages();
+        const classes = this.getClasses();
+        const name = this.getInputName();
 
         return (
-            <FormGroup className={containerClassName} check>
+            <FormGroup className={classes.container} check>
                 <Label for={name} check>
                     <Input id={name} name={name} type={type} {...input} />
-                    {` ${label}`}
+                    {` ${messages.label}`}
                 </Label>
             </FormGroup>
         );
     }
 
-    getClassNames() {
+    getClasses() {
         const { fullWidth } = this.props;
 
         return {
-            containerClassName: css({
+            container: css({
                 'col-md-12': fullWidth
             })
         };
     }
 
     getMessages() {
-        const { name, label, translate } = this.props;
+        const { label, translate } = this.props;
+        const name = this.getInputName();
 
         return {
             label: translate(name, 'label', label)
         };
     }
+
+    getInputName = _ => this.props.name ? this.props.name : this.props.input.name;
 }

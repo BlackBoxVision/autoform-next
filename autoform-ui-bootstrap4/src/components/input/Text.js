@@ -29,30 +29,20 @@ export default class TextInput extends React.Component {
     };
 
     render() {
-        const {
-            name,
-            input,
-            type,
-            children,
-            readOnly
-        } = this.props;
-
-        const {
-            containerClassName,
-            inputClassName,
-            labelClassName
-        } = this.getClassNames();
-        const { label, placeholder, helpText, error } = this.getMessages();
+        const { input, type, children, readOnly, helpText } = this.props;
+        const messages = this.getMessages();
+        const classes = this.getClasses();
         const hasError = this.hasError();
-
+        const name = this.getInputName();
+        
         return (
-            <FormGroup className={containerClassName}>
-                <Label for={name} className={labelClassName}>
-                    {label}
+            <FormGroup className={classes.container}>
+                <Label className={classes.label} for={name}>
+                    {messages.label}
                 </Label>
                 <Input
-                    className={inputClassName}
-                    placeholder={placeholder}
+                    placeholder={messages.placeholder}
+                    className={classes.input}
                     readOnly={readOnly}
                     valid={hasError}
                     name={name}
@@ -64,23 +54,23 @@ export default class TextInput extends React.Component {
                 </Input>
                 {helpText && (
                     <FormText id={name} color="muted">
-                        {helpText}
+                        {messages.helpText}
                     </FormText>
                 )}
-                <FormFeedback>{error}</FormFeedback>
+                {messages.error && hasError && <FormFeedback>{messages.error}</FormFeedback>}
             </FormGroup>
         );
     }
 
     hasError = _ => this.props.meta && this.props.meta.error && this.props.meta.touched;
 
-    getClassNames() {
+    getClasses() {
         const { meta, big, small, col } = this.props;
 
         return {
-            containerClassName: css({ [`col-md-${col}`]: !!col }),
-            labelClassName: 'col-form-label',
-            inputClassName: css({
+            container: css({ [`col-md-${col}`]: !!col }),
+            label: 'col-form-label',
+            input: css({
                 'form-control-lg': big,
                 'form-control-sm': small,
                 'is-invalid': meta && meta.error && meta.touched,
@@ -91,20 +81,22 @@ export default class TextInput extends React.Component {
 
     getMessages() {
         const {
-            name,
             meta,
             placeholder,
             helpText,
             label,
             translate
         } = this.props;
+        const name = this.getInputName();
 
         return {
             //error in meta should be the key of the message to translate
+            error: meta ? translate(name, meta.error, meta.error) : null,
             placeholder: translate(name, 'placeholder', placeholder),
-            error: meta && translate(name, meta.error, meta.error),
             helpText: translate(name, 'helpText', helpText),
             label: translate(name, 'label', label)
         };
     }
+
+    getInputName = _ => this.props.name ? this.props.name : this.props.input.name;
 }
