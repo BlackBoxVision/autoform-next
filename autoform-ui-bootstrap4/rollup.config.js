@@ -2,6 +2,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import minify from 'rollup-plugin-babel-minify';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
+import uglify from 'rollup-plugin-uglify';
 import babel from 'rollup-plugin-babel';
 
 import pkg from './package.json';
@@ -40,7 +41,8 @@ export default [
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
             }),
-            minify()
+            minify(),
+            uglify()
         ]
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
@@ -50,17 +52,32 @@ export default [
 	// the `output` option which can specify `file` and `format`)
     {
         input: 'src/index.js',
-        output: [
-            {
-                file: pkg.main,
-                format: 'cjs'
-            },
-            {
-                file: pkg.module,
-                format: 'es'
-            }
-        ],
-        external: ['react', 'react-dom', 'reactstrap', 'prop-types'],
+        output: {
+            file: pkg.main,
+            format: 'cjs'
+        },
+        external: ['react', 'react-dom', 'reactstrap'],
+        plugins: [
+            nodeResolve(),
+            babel({ 
+                runtimeHelpers: true,
+                exclude: ['node_modules/**']
+            }),
+            commonjs(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
+            minify(),
+            uglify()
+        ]
+    },
+    {
+        input: 'src/index.js',
+        output: {
+            file: pkg.module,
+            format: 'es'
+        },
+        external: ['react', 'react-dom', 'reactstrap'],
         plugins: [
             nodeResolve(),
             babel({ 
