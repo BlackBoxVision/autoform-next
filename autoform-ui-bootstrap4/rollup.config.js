@@ -13,7 +13,7 @@ export default [
     {
         name: 'AutoFormBootstrap4',
         input: 'src/index.js',
-        //sourcemap: 'inline',
+        sourcemap: true,
         output: {
             file: pkg.browser,
             format: 'umd',
@@ -71,7 +71,7 @@ export default [
 	// the `output` option which can specify `file` and `format`)
     {
         input: 'src/index.js',
-        //sourcemap: 'inline',
+        sourcemap: true,
         output: {
             file: pkg.main,
             format: 'cjs'
@@ -110,7 +110,7 @@ export default [
     },
     {
         input: 'src/index.js',
-        //sourcemap: 'inline',
+        sourcemap: true,
         output: {
             file: pkg.module,
             format: 'es'
