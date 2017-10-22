@@ -1,4 +1,6 @@
-![logo large](https://raw.githubusercontent.com/JonatanSalas/autoform-next/master/art/logo/large.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/JonatanSalas/autoform-next/master/art/logo/large.png" style="width:100%;height:auto;display:block;"/>
+</p>
 
 ## AutoForm next
 
