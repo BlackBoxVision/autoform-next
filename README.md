@@ -35,8 +35,8 @@ If everything goes okay, you should see the app running and showing you a respon
 
 ### Issues
 
-If you download
+If you're testing the repository code and found any issue, please let me know!
 
-### License
+### License
 
-This project will be distributed under MIT License.
+This project will be distributed under `MIT License`.
